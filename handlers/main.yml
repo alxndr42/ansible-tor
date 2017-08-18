@@ -1,0 +1,5 @@
+---
+- name: reload Tor
+  service:
+    name: tor
+    state: reloaded

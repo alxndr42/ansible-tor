@@ -1,0 +1,59 @@
+---
+# Bug: 0.2.7.5 cannot work inside lxc container
+# https://trac.torproject.org/projects/tor/ticket/17754
+- name: copy AppArmor override
+  copy:
+    src: apparmor-override.conf
+    dest: /etc/systemd/system/tor@default.service.d/
+  when: tor_apparmor == false
+
+- name: add Tor signing key
+  apt_key:
+    keyserver: keys.gnupg.net
+    id: A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+
+- name: add Tor repository
+  apt_repository:
+    repo: "deb http://deb.torproject.org/torproject.org {{ tor_dist }} main"
+    state: present
+  register: repo
+
+- name: update package cache
+  apt:
+    update_cache: yes
+  when: repo.changed
+
+- name: install Tor
+  apt:
+    name: tor
+    state: present
+
+# Bug: Tor needs to stop trying to read directories before it changes users
+# https://trac.torproject.org/projects/tor/ticket/22331
+- name: check for local AppArmor config
+  stat: path=/etc/apparmor.d/local/system_tor
+  register: f
+- name: allow checking HS directories
+  lineinfile:
+    name: /etc/apparmor.d/local/system_tor
+    line: "capability dac_read_search,"
+  when: f.stat.exists and ansible_distribution == "Ubuntu"
+  register: config
+- name: reload AppArmor
+  service:
+    name: apparmor
+    state: reloaded
+  when: config.changed and ansible_distribution == "Ubuntu"
+
+- name: copy exit notice
+  copy:
+    src: "{{ tor_exit_notice }}"
+    dest: /etc/tor/tor-exit-notice.html
+  when: tor_exit_notice is defined
+
+- name: template default torrc
+  template:
+    src: torrc.j2
+    dest: /etc/tor/torrc
+    backup: yes
+  notify: reload Tor

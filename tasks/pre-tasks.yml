@@ -1,0 +1,21 @@
+---
+- name: install extra bridge packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ tor_packages_bridge }}"
+  when: tor_instances_bridge
+
+- name: install extra middle packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ tor_packages_middle }}"
+  when: tor_instances_middle
+
+- name: install extra exit packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ tor_packages_exit }}"
+  when: tor_instances_exit

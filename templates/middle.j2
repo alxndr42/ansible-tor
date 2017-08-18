@@ -1,0 +1,7 @@
+{% include 'instance-head.j2' %}
+{% include 'instance-dir-port.j2' %}
+{% include 'instance-my-family.j2' %}
+
+## A comma-separated list of exit policies. They're considered first
+## to last, and the first match wins.
+ExitPolicy reject *:* # no exits allowed

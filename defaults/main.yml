@@ -1,0 +1,17 @@
+---
+tor_apparmor: true
+tor_avoid_disk: false
+tor_default_hidden_services: []
+tor_default_socks_port: 0
+tor_dist: "{{ ansible_lsb.codename }}"
+tor_instances_bridge: []
+tor_instances_exit: []
+tor_instances_middle: []
+tor_offline_keys: ~/.tor_offline_keys
+tor_packages_bridge:
+  - obfs4proxy
+tor_packages_exit:
+  - irqbalance
+  - unbound
+tor_packages_middle:
+  - irqbalance

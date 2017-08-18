@@ -1,0 +1,19 @@
+{% include 'instance-head.j2' %}
+
+## A comma-separated list of exit policies. They're considered first
+## to last, and the first match wins.
+ExitPolicy reject *:* # no exits allowed
+
+## Bridge relays (or "bridges") are Tor relays that aren't listed in the
+## main directory. Since there is no complete public list of them, even an
+## ISP that filters connections to all the known Tor relays probably
+## won't be able to block all the bridges. Also, websites won't treat you
+## differently because they won't know you're running Tor. If you can
+## be a real relay, please do; but if not, be a bridge!
+BridgeRelay 1
+ExtORPort auto
+{% for pt in item.pluggable_transports %}
+
+ServerTransportPlugin {{ pt.name }} exec {{ pt.exec }}
+ServerTransportListenAddr {{ pt.name }} {{ pt.address }}
+{% endfor %}

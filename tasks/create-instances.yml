@@ -1,0 +1,24 @@
+---
+- name: create {{ type }} instances
+  command: tor-instance-create {{ item.name }}
+  args:
+    creates: /etc/tor/instances/{{ item.name }}/torrc
+  with_items: "{{ instances }}"
+
+- name: copy offline keys
+  include: copy-offline-keys.yml
+
+- name: template {{ type }} configurations
+  template:
+    src: "{{ type }}.j2"
+    dest: /etc/tor/instances/{{ item.name }}/torrc
+    backup: yes
+  with_items: "{{ instances }}"
+  notify: reload Tor
+
+- name: enable {{ type }} services
+  service:
+    name: "tor@{{ item.name }}"
+    enabled: yes
+    state: started
+  with_items: "{{ instances }}"

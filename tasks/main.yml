@@ -1,0 +1,15 @@
+---
+- include: pre-tasks.yml
+- include: install-tor.yml
+- include: create-instances.yml
+  vars:
+    type: bridge
+    instances: "{{ tor_instances_bridge }}"
+- include: create-instances.yml
+  vars:
+    type: middle
+    instances: "{{ tor_instances_middle }}"
+- include: create-instances.yml
+  vars:
+    type: exit
+    instances: "{{ tor_instances_exit }}"
