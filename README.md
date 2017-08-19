@@ -202,6 +202,10 @@ The following properties are used by middle/exit instances:
   <td><tt>DirPort</tt> value.</td>
 </tr>
 <tr>
+  <td>ipv6_exit</td>
+  <td>Allow IPv6 exit traffic (exits only).</td>
+</tr>
+<tr>
   <td>exit_policy</td>
   <td>List of <tt>ExitPolicy</tt> values (exits only).</td>
 </tr>
@@ -217,6 +221,7 @@ Example:
           - 443
           - "[abcd::1:2:3:4]:443"
         dir_port: 80
+        ipv6_exit: 1
         exit_policy:
           - "accept *:80"
           - "accept *:443"

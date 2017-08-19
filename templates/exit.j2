@@ -10,6 +10,9 @@ DirPortFrontPage /etc/tor/tor-exit-notice.html
 {% endif %}
 {% include 'instance-my-family.j2' %}
 
+## Allow clients to use us for IPv6 traffic.
+IPv6Exit {{ item.ipv6_exit | default(0) }}
+
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.
 ##
