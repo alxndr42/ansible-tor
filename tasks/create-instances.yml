@@ -5,8 +5,18 @@
     creates: /etc/tor/instances/{{ item.name }}/torrc
   with_items: "{{ instances }}"
 
-- name: copy offline keys
-  include: copy-offline-keys.yml
+- name: copy {{ type }} offline keys
+  copy:
+    src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ item[0].name }}/keys/{{ item[1] }}"
+    dest: /var/lib/tor-instances/{{ item[0].name }}/keys/
+    mode: 0600
+    owner: _tor-{{ item[0].name }}
+    group: _tor-{{ item[0].name }}
+  with_nested:
+    - "{{ instances }}"
+    - [ed25519_master_id_public_key, ed25519_signing_cert, ed25519_signing_secret_key]
+  notify: reload Tor
+  tags: copy-offline-keys
 
 - name: template {{ type }} configurations
   template:
