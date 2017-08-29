@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.1.0
+-----
+* Add support for multiple DirPort values
+* Add HiddenServiceAuthorizeClient support
+* Add NumCPUs support
+
 1.0.2
 -----
 * Copy offline keys in nested loop, add tag
