@@ -110,12 +110,16 @@ Example:
 
     tor_default_hidden_services:
       - name: ssh
+        authorize_client: basic ssh
         ports: [ 22 ]
 
 Result:
 
     HiddenServiceDir /var/lib/tor/hs_ssh/
+    HiddenServiceAuthorizeClient basic ssh
     HiddenServicePort 22
+
+The property `authorize_client` is optional.
 
 Instance Configuration
 ----------------------

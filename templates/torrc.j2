@@ -26,6 +26,9 @@ SOCKSPort {{ tor_default_socks_port }}
 {% for hs in tor_default_hidden_services %}
 
 HiddenServiceDir /var/lib/tor/hs_{{ hs.name }}/
+{% if hs.authorize_client is defined %}
+HiddenServiceAuthorizeClient {{ hs.authorize_client }}
+{% endif %}
 {% for port in hs.ports %}
 HiddenServicePort {{ port }}
 {% endfor %}
