@@ -49,7 +49,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_exit_notice</td>
-  <td>HTML file used as <tt>DirPortFrontPage</tt> on exit instances.</td>
+  <td>Local HTML file used as <tt>DirPortFrontPage</tt> on exit instances.</td>
 </tr>
 <tr>
   <td>tor_instances_bridge</td>
@@ -66,6 +66,10 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 <tr>
   <td>tor_my_family</td>
   <td>List of fingerprints for <tt>MyFamily</tt>.</td>
+</tr>
+<tr>
+  <td>tor_num_cpus</td>
+  <td><tt>NumCPUs</tt> value.</td>
 </tr>
 <tr>
   <td>tor_offline_keys</td>

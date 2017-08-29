@@ -8,6 +8,9 @@
 AvoidDiskWrites 1
 {% endif %}
 HeartbeatPeriod 1 hours
+{% if tor_num_cpus is defined %}
+NumCPUs {{ tor_num_cpus }}
+{% endif %}
 OfflineMasterKey 1
 
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
