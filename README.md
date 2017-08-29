@@ -198,8 +198,8 @@ The following properties are used by middle/exit instances:
   <th>Description</th>
 </tr>
 <tr>
-  <td>dir_port</td>
-  <td><tt>DirPort</tt> value.</td>
+  <td>dir_ports</td>
+  <td>List of <tt>DirPort</tt> values (only one can be advertised).</td>
 </tr>
 <tr>
   <td>ipv6_exit</td>
@@ -220,7 +220,9 @@ Example:
         or_ports:
           - 443
           - "[abcd::1:2:3:4]:443"
-        dir_port: 80
+        dir_ports:
+          - 80
+          - "[abcd::1:2:3:4]:80 NoAdvertise"
         ipv6_exit: 1
         exit_policy:
           - "accept *:80"

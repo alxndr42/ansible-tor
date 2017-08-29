@@ -1,6 +1,6 @@
 {% include 'instance-head.j2' %}
 {% include 'instance-dir-port.j2' %}
-{% if item.dir_port is defined and tor_exit_notice is defined %}
+{% if tor_exit_notice is defined and (item.dir_ports is defined or item.dir_port is defined) %}
 
 ## Uncomment to return an arbitrary blob of html on your DirPort. Now you
 ## can explain what Tor is if anybody wonders why your IP address is

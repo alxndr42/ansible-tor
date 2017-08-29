@@ -1,4 +1,11 @@
-{% if item.dir_port is defined %}
+{% if item.dir_ports is defined %}
+
+## Uncomment this to mirror directory information for others. Please do
+## if you have enough bandwidth.
+{% for port in item.dir_ports %}
+DirPort {{ port }}
+{% endfor %}
+{% elif item.dir_port is defined %}
 
 ## Uncomment this to mirror directory information for others. Please do
 ## if you have enough bandwidth.
