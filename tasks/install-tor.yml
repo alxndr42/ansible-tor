@@ -58,3 +58,12 @@
     dest: /etc/tor/torrc
     backup: yes
   notify: reload Tor
+
+- name: check for /etc/tor/exit-policy-blocks
+  stat: path=/etc/tor/exit-policy-blocks
+  register: f
+- name: create /etc/tor/exit-policy-blocks
+  file:
+    path: /etc/tor/exit-policy-blocks
+    state: touch
+  when: not f.stat.exists and tor_exit_policy_blocks

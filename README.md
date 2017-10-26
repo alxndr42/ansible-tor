@@ -52,6 +52,13 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>Local HTML file used as <tt>DirPortFrontPage</tt> on exit instances.</td>
 </tr>
 <tr>
+  <td>tor_exit_policy_blocks</td>
+  <td>
+    <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before the exit
+    policy on exit instances.
+  </td>
+</tr>
+<tr>
   <td>tor_instances_bridge</td>
   <td>Bridge instance definitions (see below).</td>
 </tr>

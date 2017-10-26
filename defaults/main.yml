@@ -4,6 +4,7 @@ tor_avoid_disk: false
 tor_default_hidden_services: []
 tor_default_socks_port: 0
 tor_dist: "{{ ansible_lsb.codename }}"
+tor_exit_policy_blocks: false
 tor_instances_bridge: []
 tor_instances_exit: []
 tor_instances_middle: []
