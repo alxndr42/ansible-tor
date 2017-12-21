@@ -8,6 +8,9 @@
 AvoidDiskWrites 1
 {% endif %}
 HeartbeatPeriod 1 hours
+{% if item.max_mem_in_queues is defined %}
+MaxMemInQueues {{ item.max_mem_in_queues }}
+{% endif %}
 {% if tor_num_cpus is defined %}
 NumCPUs {{ tor_num_cpus }}
 {% endif %}

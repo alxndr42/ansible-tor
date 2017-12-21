@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.3.0
+-----
+* Add max_mem_in_queues instance variable
+
 1.2.0
 -----
 * Add tor_exit_policy_blocks variable

@@ -174,6 +174,10 @@ The following properties are common to all instance types:
   <td>contact_info</td>
   <td><tt>ContactInfo</tt> value.</td>
 </tr>
+<tr>
+  <td>max_mem_in_queues</td>
+  <td><tt>MaxMemInQueues</tt> value.</td>
+</tr>
 </table>
 
 ### Bridge Configuration ###
