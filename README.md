@@ -123,14 +123,16 @@ Example:
       - name: ssh
         authorize_client: basic ssh
         ports: [ 22 ]
+        version: 3
 
 Result:
 
     HiddenServiceDir /var/lib/tor/hs_ssh/
     HiddenServiceAuthorizeClient basic ssh
     HiddenServicePort 22
+    HiddenServiceVersion 3
 
-The property `authorize_client` is optional.
+The properties `authorize_client` and `version` are optional.
 
 Instance Configuration
 ----------------------

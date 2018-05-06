@@ -32,5 +32,8 @@ HiddenServiceAuthorizeClient {{ hs.authorize_client }}
 {% for port in hs.ports %}
 HiddenServicePort {{ port }}
 {% endfor %}
+{% if hs.version is defined %}
+HiddenServiceVersion {{ hs.version }}
+{% endif %}
 {% endfor %}
 {% endif %}
