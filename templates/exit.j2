@@ -10,6 +10,13 @@ DirPortFrontPage /etc/tor/tor-exit-notice.html
 {% endif %}
 {% include 'instance-my-family.j2' %}
 
+{% if item.exit_addresses is defined %}
+## IP address(es) to use for exit connections
+{% for address in item.exit_addresses %}
+OutboundBindAddressExit {{ address }}
+{% endfor %}
+
+{% endif %}
 ## Allow clients to use us for IPv6 traffic.
 IPv6Exit {{ item.ipv6_exit | default(0) }}
 

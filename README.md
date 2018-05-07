@@ -220,15 +220,23 @@ The following properties are used by middle/exit instances:
 </tr>
 <tr>
   <td>dir_ports</td>
-  <td>List of <tt>DirPort</tt> values (only one can be advertised).</td>
+  <td>
+      List of <tt>DirPort</tt> values (optional, only one can be advertised).
+  </td>
 </tr>
 <tr>
-  <td>ipv6_exit</td>
-  <td>Allow IPv6 exit traffic (exits only).</td>
+  <td>exit_addresses</td>
+  <td>
+      List of <tt>OutboundBindAddressExit</tt> values (optional, exits only).
+  </td>
 </tr>
 <tr>
   <td>exit_policy</td>
   <td>List of <tt>ExitPolicy</tt> values (exits only).</td>
+</tr>
+<tr>
+  <td>ipv6_exit</td>
+  <td>Allow IPv6 exit traffic (optional, exits only).</td>
 </tr>
 </table>
 
@@ -244,6 +252,9 @@ Example:
         dir_ports:
           - 80
           - "[abcd::1:2:3:4]:80 NoAdvertise"
+        exit_addresses:
+          - 1.2.3.4
+          - "[abcd::1:2:3:4]"
         ipv6_exit: 1
         exit_policy:
           - "accept *:80"
