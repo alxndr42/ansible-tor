@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.4.0
+-----
+* Add version property for hidden services
+* Add exit_addresses property for exit relays
+
 1.3.0
 -----
 * Add max_mem_in_queues instance variable
