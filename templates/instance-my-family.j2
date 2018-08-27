@@ -7,5 +7,7 @@
 ## https://www.torproject.org/docs/faq#MultipleRelays
 ## However, you should never include a bridge's fingerprint here, as it would
 ## break its concealability and potentially reveal its IP/TCP address.
-MyFamily {{ tor_my_family | join(',') }}
+{% for fingerprint in tor_my_family %}
+MyFamily {{ fingerprint }}
+{% endfor %}
 {% endif %}

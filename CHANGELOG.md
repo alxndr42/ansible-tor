@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.5.0
+-----
+* Configure MyFamily as multiple lines
+
 1.4.0
 -----
 * Add version property for hidden services
