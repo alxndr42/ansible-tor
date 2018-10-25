@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.6.0
+-----
+* Install deb.torproject.org-keyring
+* Template RelayBandwidth* only if present
+
 1.5.0
 -----
 * Configure MyFamily as multiple lines

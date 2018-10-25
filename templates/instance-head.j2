@@ -34,6 +34,7 @@ ORPort {{ port }}
 ## Nicknames must be between 1 and 19 characters inclusive, and must
 ## contain only the characters [a-zA-Z0-9].
 Nickname {{ item.nickname | default('ididnteditheconfig') }}
+{% if item.relay_bandwidth_rate is defined or item.relay_bandwidth_burst is defined %}
 
 ## Define these to limit how much relayed traffic you will allow. Your
 ## own traffic is still unthrottled. Note that RelayBandwidthRate must
@@ -43,6 +44,7 @@ Nickname {{ item.nickname | default('ididnteditheconfig') }}
 ## 2^20, etc.
 RelayBandwidthRate {{ item.relay_bandwidth_rate | default(0) }}
 RelayBandwidthBurst {{ item.relay_bandwidth_burst | default(0) }}
+{% endif %}
 {% if item.contact_info is defined %}
 
 ## Administrative contact information for this relay or bridge. This line

@@ -23,10 +23,13 @@
     update_cache: yes
   when: repo.changed
 
-- name: install Tor
+- name: install packages
   apt:
-    name: tor
+    name: "{{ item }}"
     state: present
+  with_items:
+    - deb.torproject.org-keyring
+    - tor
 
 # Bug: Tor needs to stop trying to read directories before it changes users
 # https://trac.torproject.org/projects/tor/ticket/22331
