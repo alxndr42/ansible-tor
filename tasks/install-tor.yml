@@ -25,11 +25,10 @@
 
 - name: install packages
   apt:
-    name: "{{ item }}"
+    name:
+      - deb.torproject.org-keyring
+      - tor
     state: present
-  with_items:
-    - deb.torproject.org-keyring
-    - tor
 
 # Bug: Tor needs to stop trying to read directories before it changes users
 # https://trac.torproject.org/projects/tor/ticket/22331

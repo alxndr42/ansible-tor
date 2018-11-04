@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.0
+-----
+* Update apt parameters for Ansible 2.7
+
 1.6.0
 -----
 * Install deb.torproject.org-keyring
