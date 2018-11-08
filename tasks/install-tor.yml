@@ -39,13 +39,15 @@
   lineinfile:
     name: /etc/apparmor.d/local/system_tor
     line: "capability dac_read_search,"
-  when: f.stat.exists and ansible_distribution == "Ubuntu"
+  when: f.stat.exists
   register: config
+- name: populate service facts
+  service_facts:
 - name: reload AppArmor
   service:
     name: apparmor
     state: reloaded
-  when: config.changed and ansible_distribution == "Ubuntu"
+  when: config.changed and "apparmor" in services
 
 - name: copy exit notice
   copy:
