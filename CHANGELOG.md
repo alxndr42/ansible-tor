@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.8.0
+-----
+* Use new loop keyword, remove nested loop
+* Copy local RSA key
+* Fix AppArmor handling
+
 1.7.0
 -----
 * Update apt parameters for Ansible 2.7
