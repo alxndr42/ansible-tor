@@ -99,7 +99,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 Offline Keys
 ------------
 
-A given host's and instance's offline keys are copied from
+A given host's and instance's offline keys are copied from the directory
 `{{ tor_offline_keys }}/{{ inventory_hostname }}/INSTANCE_NAME/keys`.
 See `man tor` for information on how to manage offline keys.
 
@@ -110,6 +110,10 @@ and an instance name of `exit`, offline keys would be generated with this
 command:
 
     tor --DataDirectory ~/.tor_offline_keys/tor-exit/exit --keygen
+
+**Please note:** Tor creates the RSA key `secret_id_key` for new relays. This
+key is part of the relay identity, so you should create a backup. If the key is
+found in the directory mentioned above, it is also copied to the host.
 
 Hidden Services
 ---------------

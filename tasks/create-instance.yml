@@ -18,6 +18,22 @@
   notify: reload Tor
   tags: copy-offline-keys
 
+- name: check for local RSA key
+  local_action:
+    module: stat
+    path: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/secret_id_key"
+  become: no
+  register: rsa_key
+
+- name: copy local RSA key
+  copy:
+    src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/secret_id_key"
+    dest: /var/lib/tor-instances/{{ instance.name }}/keys/
+    mode: 0600
+    owner: _tor-{{ instance.name }}
+    group: _tor-{{ instance.name }}
+  when: rsa_key.stat.exists
+
 - name: template torrc
   template:
     src: "{{ type }}.j2"
