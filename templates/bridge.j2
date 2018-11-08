@@ -12,7 +12,7 @@ ExitPolicy reject *:* # no exits allowed
 ## be a real relay, please do; but if not, be a bridge!
 BridgeRelay 1
 ExtORPort auto
-{% for pt in item.pluggable_transports %}
+{% for pt in instance.pluggable_transports %}
 
 ServerTransportPlugin {{ pt.name }} exec {{ pt.exec }}
 ServerTransportListenAddr {{ pt.name }} {{ pt.address }}

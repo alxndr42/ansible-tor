@@ -1,15 +1,24 @@
 ---
 - include: pre-tasks.yml
 - include: install-tor.yml
-- include: create-instances.yml
+- name: create bridge instances
+  include: create-instance.yml
   vars:
     type: bridge
-    instances: "{{ tor_instances_bridge }}"
-- include: create-instances.yml
+  loop: "{{ tor_instances_bridge }}"
+  loop_control:
+    loop_var: instance
+- name: create middle instances
+  include: create-instance.yml
   vars:
     type: middle
-    instances: "{{ tor_instances_middle }}"
-- include: create-instances.yml
+  loop: "{{ tor_instances_middle }}"
+  loop_control:
+    loop_var: instance
+- name: create exit instances
+  include: create-instance.yml
   vars:
     type: exit
-    instances: "{{ tor_instances_exit }}"
+  loop: "{{ tor_instances_exit }}"
+  loop_control:
+    loop_var: instance

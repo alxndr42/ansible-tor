@@ -1,6 +1,6 @@
 {% include 'instance-head.j2' %}
 {% include 'instance-dir-port.j2' %}
-{% if tor_exit_notice is defined and (item.dir_ports is defined or item.dir_port is defined) %}
+{% if tor_exit_notice is defined and (instance.dir_ports is defined or instance.dir_port is defined) %}
 
 ## Uncomment to return an arbitrary blob of html on your DirPort. Now you
 ## can explain what Tor is if anybody wonders why your IP address is
@@ -10,15 +10,15 @@ DirPortFrontPage /etc/tor/tor-exit-notice.html
 {% endif %}
 {% include 'instance-my-family.j2' %}
 
-{% if item.exit_addresses is defined %}
+{% if instance.exit_addresses is defined %}
 ## IP address(es) to use for exit connections
-{% for address in item.exit_addresses %}
+{% for address in instance.exit_addresses %}
 OutboundBindAddressExit {{ address }}
 {% endfor %}
 
 {% endif %}
 ## Allow clients to use us for IPv6 traffic.
-IPv6Exit {{ item.ipv6_exit | default(0) }}
+IPv6Exit {{ instance.ipv6_exit | default(0) }}
 
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.
@@ -50,6 +50,6 @@ IPv6Exit {{ item.ipv6_exit | default(0) }}
 {% if tor_exit_policy_blocks %}
 %include /etc/tor/exit-policy-blocks
 {% endif %}
-{% for policy in item.exit_policy %}
+{% for policy in instance.exit_policy %}
 ExitPolicy {{ policy }}
 {% endfor %}

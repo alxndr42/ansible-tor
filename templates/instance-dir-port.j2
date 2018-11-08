@@ -1,13 +1,13 @@
-{% if item.dir_ports is defined %}
+{% if instance.dir_ports is defined %}
 
 ## Uncomment this to mirror directory information for others. Please do
 ## if you have enough bandwidth.
-{% for port in item.dir_ports %}
+{% for port in instance.dir_ports %}
 DirPort {{ port }}
 {% endfor %}
-{% elif item.dir_port is defined %}
+{% elif instance.dir_port is defined %}
 
 ## Uncomment this to mirror directory information for others. Please do
 ## if you have enough bandwidth.
-DirPort {{ item.dir_port }}
+DirPort {{ instance.dir_port }}
 {% endif %}

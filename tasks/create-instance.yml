@@ -1,0 +1,32 @@
+---
+- name: create instance {{ instance.name }}
+  command: tor-instance-create {{ instance.name }}
+  args:
+    creates: /etc/tor/instances/{{ instance.name }}/torrc
+
+- name: copy offline ED25519 keys
+  copy:
+    src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/{{ item }}"
+    dest: /var/lib/tor-instances/{{ instance.name }}/keys/
+    mode: 0600
+    owner: _tor-{{ instance.name }}
+    group: _tor-{{ instance.name }}
+  loop:
+    - ed25519_master_id_public_key
+    - ed25519_signing_cert
+    - ed25519_signing_secret_key
+  notify: reload Tor
+  tags: copy-offline-keys
+
+- name: template torrc
+  template:
+    src: "{{ type }}.j2"
+    dest: /etc/tor/instances/{{ instance.name }}/torrc
+    backup: yes
+  notify: reload Tor
+
+- name: enable service
+  service:
+    name: tor@{{ instance.name }}
+    enabled: yes
+    state: started
