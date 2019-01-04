@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.0
+-----
+* Add reduced_exit_policy property for exit relays
+
 1.8.0
 -----
 * Use new loop keyword, remove nested loop
