@@ -239,6 +239,10 @@ The following properties are used by middle/exit instances:
   <td>List of <tt>ExitPolicy</tt> values (exits only).</td>
 </tr>
 <tr>
+  <td>reduced_exit_policy</td>
+  <td><tt>ReducedExitPolicy</tt> value, if <tt>exit_policy</tt> is not defined (exits only).</td>
+</tr>
+<tr>
   <td>ipv6_exit</td>
   <td>Allow IPv6 exit traffic (optional, exits only).</td>
 </tr>

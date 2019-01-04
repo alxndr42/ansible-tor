@@ -19,6 +19,7 @@ OutboundBindAddressExit {{ address }}
 {% endif %}
 ## Allow clients to use us for IPv6 traffic.
 IPv6Exit {{ instance.ipv6_exit | default(0) }}
+{% if instance.exit_policy is defined %}
 
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.
@@ -53,3 +54,8 @@ IPv6Exit {{ instance.ipv6_exit | default(0) }}
 {% for policy in instance.exit_policy %}
 ExitPolicy {{ policy }}
 {% endfor %}
+{% elif instance.reduced_exit_policy is defined %}
+
+## Use the reduced exit policy
+ReducedExitPolicy {{ instance.reduced_exit_policy }}
+{% endif %}
