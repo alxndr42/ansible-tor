@@ -84,15 +84,19 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_packages_bridge</td>
-  <td>Extra packages to install for bridge instances.</td>
+  <td>System packages to install on bridge instances.</td>
 </tr>
 <tr>
   <td>tor_packages_exit</td>
-  <td>Extra packages to install for exit instances.</td>
+  <td>System packages to install on exit instances.</td>
+</tr>
+<tr>
+  <td>tor_packages_extra</td>
+  <td>Extra system packages to install on a given instance.</td>
 </tr>
 <tr>
   <td>tor_packages_middle</td>
-  <td>Extra packages to install for middle instances.</td>
+  <td>System packages to install on middle instances.</td>
 </tr>
 </table>
 

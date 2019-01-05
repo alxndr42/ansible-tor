@@ -12,7 +12,9 @@ tor_offline_keys: ~/.tor_offline_keys
 tor_packages_bridge:
   - obfs4proxy
 tor_packages_exit:
+  - haveged
   - irqbalance
-  - unbound
+tor_packages_extra: []
 tor_packages_middle:
+  - haveged
   - irqbalance

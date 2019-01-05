@@ -1,18 +1,24 @@
 ---
-- name: install extra bridge packages
+- name: install bridge packages
   apt:
     name: "{{ tor_packages_bridge }}"
     state: present
   when: tor_instances_bridge
 
-- name: install extra middle packages
+- name: install middle packages
   apt:
     name: "{{ tor_packages_middle }}"
     state: present
   when: tor_instances_middle
 
-- name: install extra exit packages
+- name: install exit packages
   apt:
     name: "{{ tor_packages_exit }}"
     state: present
   when: tor_instances_exit
+
+- name: install extra packages
+  apt:
+    name: "{{ tor_packages_extra }}"
+    state: present
+  when: tor_packages_extra
