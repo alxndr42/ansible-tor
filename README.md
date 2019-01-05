@@ -1,5 +1,4 @@
-ansible-tor
-===========
+# ansible-tor
 
 Installs Tor relays on Debian-based systems.
 
@@ -8,16 +7,45 @@ only for hidden services and optionally a SOCKS proxy. Bridge, middle and exit
 relays are created as additional instances using the _tor-instance-create_
 script (configuration under _/etc/tor/instances_).
 
-Requirements
-------------
+## Requirements
 
 * Debian-based system with systemd
 * Offline keys as described below
 
-Role Variables
---------------
+## Role Variables
 
 Please see [defaults/main.yml](defaults/main.yml) for default values.
+
+### Main Variables
+
+<table>
+<tr>
+  <th>Variable</th>
+  <th>Description</th>
+</tr>
+<tr>
+  <td>tor_instances_bridge</td>
+  <td>Bridge instance definitions (see below).</td>
+</tr>
+<tr>
+  <td>tor_instances_exit</td>
+  <td>Exit instance definitions (see below).</td>
+</tr>
+<tr>
+  <td>tor_instances_middle</td>
+  <td>Middle instance definitions (see below).</td>
+</tr>
+<tr>
+  <td>tor_my_family</td>
+  <td>List of fingerprints for <tt>MyFamily</tt>.</td>
+</tr>
+<tr>
+  <td>tor_offline_keys</td>
+  <td>Local base directory for offline keys (see below).</td>
+</tr>
+</table>
+
+### Other Variables
 
 <table>
 <tr>
@@ -59,28 +87,8 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   </td>
 </tr>
 <tr>
-  <td>tor_instances_bridge</td>
-  <td>Bridge instance definitions (see below).</td>
-</tr>
-<tr>
-  <td>tor_instances_exit</td>
-  <td>Exit instance definitions (see below).</td>
-</tr>
-<tr>
-  <td>tor_instances_middle</td>
-  <td>Middle instance definitions (see below).</td>
-</tr>
-<tr>
-  <td>tor_my_family</td>
-  <td>List of fingerprints for <tt>MyFamily</tt>.</td>
-</tr>
-<tr>
   <td>tor_num_cpus</td>
   <td><tt>NumCPUs</tt> value.</td>
-</tr>
-<tr>
-  <td>tor_offline_keys</td>
-  <td>Base directory for offline keys (see below).</td>
 </tr>
 <tr>
   <td>tor_packages_bridge</td>
@@ -100,55 +108,13 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 </table>
 
-Offline Keys
-------------
-
-A given host's and instance's offline keys are copied from the directory
-`{{ tor_offline_keys }}/{{ inventory_hostname }}/INSTANCE_NAME/keys`.
-See `man tor` for information on how to manage offline keys.
-
-Example:
-
-Using the default `tor_offline_keys` value, an inventory hostname of `tor-exit`
-and an instance name of `exit`, offline keys would be generated with this
-command:
-
-    tor --DataDirectory ~/.tor_offline_keys/tor-exit/exit --keygen
-
-**Please note:** Tor creates the RSA key `secret_id_key` for new relays. This
-key is part of the relay identity, so you should create a backup. If the key is
-found in the directory mentioned above, it is also copied to the host.
-
-Hidden Services
----------------
-
-Hidden services are only configured on the default instance via the
-`tor_default_hidden_services` variable.
-
-Example:
-
-    tor_default_hidden_services:
-      - name: ssh
-        authorize_client: basic ssh
-        ports: [ 22 ]
-        version: 3
-
-Result:
-
-    HiddenServiceDir /var/lib/tor/hs_ssh/
-    HiddenServiceAuthorizeClient basic ssh
-    HiddenServicePort 22
-    HiddenServiceVersion 3
-
-The properties `authorize_client` and `version` are optional.
-
-Instance Configuration
-----------------------
+## Instance Configuration
 
 Bridge, middle and exit relays are created using the _tor-instance-create_
 script and configured via three separate variables in the inventory (see above).
 
-The following properties are common to all instance types:
+The following properties are common to all instance types (required properties
+in **bold**):
 
 <table>
 <tr>
@@ -156,17 +122,17 @@ The following properties are common to all instance types:
   <th>Description</th>
 </tr>
 <tr>
-  <td>name</td>
+  <td><b>name</b></td>
   <td>
-    Instance name (required). Example: the instance name <tt>foo</tt> will create
-    the systemd unit <tt>tor@foo</tt> owned by user/group <tt>_tor-foo</tt>.
-    The configuration will be in <i>/etc/tor/instances/foo/torrc</i>,
-    the data in <i>/var/lib/tor-instances/foo</i>.
+    Instance name. Example: the instance name <tt>foo</tt> will create the
+    systemd unit <tt>tor@foo</tt> owned by user/group <tt>_tor-foo</tt>.
+    The configuration will be in <i>/etc/tor/instances/foo/torrc</i>, the data
+    in <i>/var/lib/tor-instances/foo</i>.
   </td>
 </tr>
 <tr>
-  <td>or_ports</td>
-  <td>List of <tt>ORPort</tt> values (required).</td>
+  <td><b>or_ports</b></td>
+  <td>List of <tt>ORPort</tt> values.</td>
 </tr>
 <tr>
   <td>nickname</td>
@@ -190,9 +156,10 @@ The following properties are common to all instance types:
 </tr>
 </table>
 
-### Bridge Configuration ###
+### Bridge Configuration
 
-The following properties are used by bridge instances:
+The following properties are used by bridge instances (required properties in
+**bold**):
 
 <table>
 <tr>
@@ -200,7 +167,7 @@ The following properties are used by bridge instances:
   <th>Description</th>
 </tr>
 <tr>
-  <td>pluggable_transports</td>
+  <td><b>pluggable_transports</b></td>
   <td>List of pluggable transport definitions (see below).</td>
 </tr>
 </table>
@@ -210,16 +177,17 @@ Example:
     tor_instances_bridge:
       - name: bridge
         nickname: MyCoolBridge
-        or_ports: [ 9000 ]
+        or_ports: [9000]
         contact_info: "Foo <foo@example.com>"
         pluggable_transports:
           - name: obfs4
             exec: /usr/bin/obfs4proxy
             address: 0.0.0.0:8443
 
-### Middle/Exit Configuration ###
+### Middle/Exit Configuration
 
-The following properties are used by middle/exit instances:
+The following properties are used by middle/exit instances (required properties
+in **bold**):
 
 <table>
 <tr>
@@ -229,13 +197,13 @@ The following properties are used by middle/exit instances:
 <tr>
   <td>dir_ports</td>
   <td>
-      List of <tt>DirPort</tt> values (optional, only one can be advertised).
+      List of <tt>DirPort</tt> values (only one can be advertised).
   </td>
 </tr>
 <tr>
   <td>exit_addresses</td>
   <td>
-      List of <tt>OutboundBindAddressExit</tt> values (optional, exits only).
+      List of <tt>OutboundBindAddressExit</tt> values (exits only).
   </td>
 </tr>
 <tr>
@@ -244,11 +212,14 @@ The following properties are used by middle/exit instances:
 </tr>
 <tr>
   <td>reduced_exit_policy</td>
-  <td><tt>ReducedExitPolicy</tt> value, if <tt>exit_policy</tt> is not defined (exits only).</td>
+  <td>
+    <tt>ReducedExitPolicy</tt> value, if <tt>exit_policy</tt> is not defined
+    (exits only).
+  </td>
 </tr>
 <tr>
   <td>ipv6_exit</td>
-  <td>Allow IPv6 exit traffic (optional, exits only).</td>
+  <td>Allow IPv6 exit traffic (exits only).</td>
 </tr>
 </table>
 
@@ -261,12 +232,6 @@ Example:
         or_ports:
           - 443
           - "[abcd::1:2:3:4]:443"
-        dir_ports:
-          - 80
-          - "[abcd::1:2:3:4]:80 NoAdvertise"
-        exit_addresses:
-          - 1.2.3.4
-          - "[abcd::1:2:3:4]"
         ipv6_exit: 1
         exit_policy:
           - "accept *:80"
@@ -274,7 +239,46 @@ Example:
           [...]
           - "reject *:*"
 
-License
--------
+## Offline Keys
+
+A given host's and instance's offline keys are copied from the local directory
+`{{ tor_offline_keys }}/{{ inventory_hostname }}/INSTANCE_NAME/keys`.
+See `man tor` for information on how to manage offline keys.
+
+Example:
+
+Using the default `tor_offline_keys` value, an inventory hostname of `tor-exit`
+and an instance name of `exit`, offline keys would be generated with this
+command:
+
+    tor --DataDirectory ~/.tor_offline_keys/tor-exit/exit --keygen
+
+**Please note:** Tor creates the RSA key `secret_id_key` for new relays. This
+key is part of the relay identity, so you should create a backup. If the key is
+found in the local directory mentioned above, it is also copied to the host.
+
+## Hidden Services
+
+Hidden services are only configured on the default instance via the
+`tor_default_hidden_services` variable.
+
+Example:
+
+    tor_default_hidden_services:
+      - name: ssh
+        authorize_client: basic ssh
+        ports: [22]
+        version: 3
+
+Result:
+
+    HiddenServiceDir /var/lib/tor/hs_ssh/
+    HiddenServiceAuthorizeClient basic ssh
+    HiddenServicePort 22
+    HiddenServiceVersion 3
+
+The properties `authorize_client` and `version` are optional.
+
+## License
 
 GPLv3
