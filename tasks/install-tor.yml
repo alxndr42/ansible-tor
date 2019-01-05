@@ -58,7 +58,7 @@
 
 - name: template default torrc
   template:
-    src: torrc.j2
+    src: torrc-default.j2
     dest: /etc/tor/torrc
     backup: yes
   notify: reload Tor

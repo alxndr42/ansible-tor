@@ -34,9 +34,9 @@
     group: _tor-{{ instance.name }}
   when: rsa_key.stat.exists
 
-- name: template torrc
+- name: template instance torrc
   template:
-    src: "{{ type }}.j2"
+    src: torrc-{{ type }}.j2
     dest: /etc/tor/instances/{{ instance.name }}/torrc
     backup: yes
   notify: reload Tor
