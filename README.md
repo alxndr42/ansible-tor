@@ -98,6 +98,14 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   </td>
 </tr>
 <tr>
+  <td>tor_nameservers</td>
+  <td>
+    List of nameserver addresses to add to <i>/etc/tor/resolv.conf</i>, which
+    will be used by bridge, middle and exit instances as
+    <tt>ServerDNSResolvConfFile</tt>.
+  </td>
+</tr>
+<tr>
   <td>tor_num_cpus</td>
   <td><tt>NumCPUs</tt> value.</td>
 </tr>

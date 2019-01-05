@@ -15,6 +15,9 @@ MaxMemInQueues {{ instance.max_mem_in_queues }}
 NumCPUs {{ tor_num_cpus }}
 {% endif %}
 OfflineMasterKey 1
+{% if tor_nameservers is defined %}
+ServerDNSResolvConfFile /etc/tor/resolv.conf
+{% endif %}
 
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only

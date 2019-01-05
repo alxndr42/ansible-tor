@@ -56,6 +56,13 @@
   when: tor_exit_notice is defined
   notify: reload Tor
 
+- name: template resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: /etc/tor/resolv.conf
+  when: tor_nameservers is defined
+  notify: reload Tor
+
 - name: template default torrc
   template:
     src: torrc-default.j2
