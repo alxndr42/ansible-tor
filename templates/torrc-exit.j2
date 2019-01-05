@@ -19,7 +19,7 @@ OutboundBindAddressExit {{ address }}
 {% endif %}
 ## Allow clients to use us for IPv6 traffic.
 IPv6Exit {{ instance.ipv6_exit | default(0) }}
-{% if instance.exit_policy is defined %}
+{% if instance.exit_policy is defined or (tor_exit_policy is defined and instance.reduced_exit_policy is undefined) %}
 
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.
@@ -51,11 +51,21 @@ IPv6Exit {{ instance.ipv6_exit | default(0) }}
 {% if tor_exit_policy_blocks %}
 %include /etc/tor/exit-policy-blocks
 {% endif %}
+{% if instance.exit_policy is defined %}
 {% for policy in instance.exit_policy %}
 ExitPolicy {{ policy }}
 {% endfor %}
-{% elif instance.reduced_exit_policy is defined %}
+{% else %}
+{% for policy in tor_exit_policy %}
+ExitPolicy {{ policy }}
+{% endfor %}
+{% endif %}
+{% elif instance.reduced_exit_policy is defined or tor_reduced_exit_policy is defined %}
 
 ## Use the reduced exit policy
+{% if instance.reduced_exit_policy is defined %}
 ReducedExitPolicy {{ instance.reduced_exit_policy }}
+{% else %}
+ReducedExitPolicy {{ tor_reduced_exit_policy }}
+{% endif %}
 {% endif %}

@@ -28,12 +28,23 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>Bridge instance definitions (see below).</td>
 </tr>
 <tr>
+  <td>tor_instances_middle</td>
+  <td>Middle instance definitions (see below).</td>
+</tr>
+<tr>
   <td>tor_instances_exit</td>
   <td>Exit instance definitions (see below).</td>
 </tr>
 <tr>
-  <td>tor_instances_middle</td>
-  <td>Middle instance definitions (see below).</td>
+  <td>tor_exit_policy</td>
+  <td>List of global <tt>ExitPolicy</tt> values (exits only).</td>
+</tr>
+<tr>
+  <td>tor_reduced_exit_policy</td>
+  <td>
+    Global <tt>ReducedExitPolicy</tt> value, if <tt>tor_exit_policy</tt> is
+    undefined (exits only).
+  </td>
 </tr>
 <tr>
   <td>tor_my_family</td>
@@ -208,13 +219,17 @@ in **bold**):
 </tr>
 <tr>
   <td>exit_policy</td>
-  <td>List of <tt>ExitPolicy</tt> values (exits only).</td>
+  <td>
+    List of <tt>ExitPolicy</tt> values (exits only).<br>
+    Overrides global exit variables.
+  </td>
 </tr>
 <tr>
   <td>reduced_exit_policy</td>
   <td>
-    <tt>ReducedExitPolicy</tt> value, if <tt>exit_policy</tt> is not defined
-    (exits only).
+    <tt>ReducedExitPolicy</tt> value, if <tt>exit_policy</tt> is undefined
+    (exits only).<br>
+    Overrides global exit variables.
   </td>
 </tr>
 <tr>
