@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.10.0
+------
+* Remove unbound from tor_packages_exit, add tor_packages_extra
+* Add global and local exit policy config for exits
+* Add tor_nameservers variable
+* Improve documentation
+
 1.9.0
 -----
 * Add reduced_exit_policy property for exit relays
