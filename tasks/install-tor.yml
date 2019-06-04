@@ -9,7 +9,7 @@
 
 - name: add Tor signing key
   apt_key:
-    keyserver: keys.gnupg.net
+    url: https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc
     id: A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
 
 - name: add Tor repository
