@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.10.1
+------
+* Change keyserver to URL for apt-key
+
 1.10.0
 ------
 * Remove unbound from tor_packages_exit, add tor_packages_extra
