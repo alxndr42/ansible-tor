@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.10.2
+------
+* Fix Ansible deprecation warnings
+
 1.10.1
 ------
 * Change keyserver to URL for apt-key
