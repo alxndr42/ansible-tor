@@ -3,22 +3,22 @@
   apt:
     name: "{{ tor_packages_bridge }}"
     state: present
-  when: tor_instances_bridge
+  when: tor_instances_bridge | list
 
 - name: install middle packages
   apt:
     name: "{{ tor_packages_middle }}"
     state: present
-  when: tor_instances_middle
+  when: tor_instances_middle | list
 
 - name: install exit packages
   apt:
     name: "{{ tor_packages_exit }}"
     state: present
-  when: tor_instances_exit
+  when: tor_instances_exit | list
 
 - name: install extra packages
   apt:
     name: "{{ tor_packages_extra }}"
     state: present
-  when: tor_packages_extra
+  when: tor_packages_extra | list
