@@ -53,7 +53,7 @@
   copy:
     src: "{{ tor_exit_notice }}"
     dest: /etc/tor/tor-exit-notice.html
-  when: tor_exit_notice is defined
+  when: tor_exit_notice is defined and tor_instances_exit
   notify: reload Tor
 
 - name: template resolv.conf
