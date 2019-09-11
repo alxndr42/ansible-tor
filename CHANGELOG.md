@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.10.3
+------
+* Make sure GnuPG is installed
+* Copy Tor exit notice only to exits
+
 1.10.2
 ------
 * Fix Ansible deprecation warnings
