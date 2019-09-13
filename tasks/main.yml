@@ -1,6 +1,11 @@
 ---
-- include: pre-tasks.yml
+- name: install extra packages
+  apt:
+    name: "{{ tor_packages_extra }}"
+  when: tor_packages_extra | list
+
 - include: install-tor.yml
+
 - name: create bridge instances
   include: create-instance.yml
   vars:
@@ -8,6 +13,7 @@
   loop: "{{ tor_instances_bridge }}"
   loop_control:
     loop_var: instance
+
 - name: create middle instances
   include: create-instance.yml
   vars:
@@ -15,6 +21,7 @@
   loop: "{{ tor_instances_middle }}"
   loop_control:
     loop_var: instance
+
 - name: create exit instances
   include: create-instance.yml
   vars:

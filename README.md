@@ -110,20 +110,8 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td><tt>NumCPUs</tt> value.</td>
 </tr>
 <tr>
-  <td>tor_packages_bridge</td>
-  <td>System packages to install on bridge instances.</td>
-</tr>
-<tr>
-  <td>tor_packages_exit</td>
-  <td>System packages to install on exit instances.</td>
-</tr>
-<tr>
   <td>tor_packages_extra</td>
-  <td>Extra system packages to install on a given instance.</td>
-</tr>
-<tr>
-  <td>tor_packages_middle</td>
-  <td>System packages to install on middle instances.</td>
+  <td>Extra system packages to install.</td>
 </tr>
 </table>
 
