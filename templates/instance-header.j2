@@ -7,18 +7,17 @@
 {% if tor_avoid_disk %}
 AvoidDiskWrites 1
 {% endif %}
-HeartbeatPeriod 1 hours
-{% if instance.max_mem_in_queues is defined %}
-MaxMemInQueues {{ instance.max_mem_in_queues }}
-{% endif %}
-{% if tor_num_cpus is defined %}
-NumCPUs {{ tor_num_cpus }}
-{% endif %}
 OfflineMasterKey 1
 {% if tor_nameservers is defined %}
 ServerDNSResolvConfFile /etc/tor/resolv.conf
 {% endif %}
 
+{% if tor_instance_settings is defined %}
+{% for setting in tor_instance_settings %}
+{{ setting }}
+{% endfor %}
+
+{% endif %}
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.

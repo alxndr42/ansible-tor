@@ -90,6 +90,10 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   </td>
 </tr>
 <tr>
+  <td>tor_instance_settings</td>
+  <td>List of settings to be added at the top of instance torrc files.</td>
+</tr>
+<tr>
   <td>tor_my_family</td>
   <td>List of fingerprints for <tt>MyFamily</tt>.</td>
 </tr>
@@ -100,10 +104,6 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
     will be used by bridge, middle and exit instances as
     <tt>ServerDNSResolvConfFile</tt>.
   </td>
-</tr>
-<tr>
-  <td>tor_num_cpus</td>
-  <td><tt>NumCPUs</tt> value.</td>
 </tr>
 <tr>
   <td>tor_packages_extra</td>
@@ -156,10 +156,6 @@ in **bold**):
 <tr>
   <td>contact_info</td>
   <td><tt>ContactInfo</tt> value.</td>
-</tr>
-<tr>
-  <td>max_mem_in_queues</td>
-  <td><tt>MaxMemInQueues</tt> value.</td>
 </tr>
 </table>
 
