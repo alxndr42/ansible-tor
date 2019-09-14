@@ -11,7 +11,6 @@
   apt:
     name:
       - gnupg
-    state: present
 
 - name: add Tor signing key
   apt_key:
@@ -20,21 +19,13 @@
 
 - name: add Tor repository
   apt_repository:
-    repo: "deb http://deb.torproject.org/torproject.org {{ tor_dist }} main"
-    state: present
-  register: repo
-
-- name: update package cache
-  apt:
-    update_cache: yes
-  when: repo.changed
+    repo: deb http://deb.torproject.org/torproject.org {{ tor_dist }} main
 
 - name: install packages
   apt:
     name:
       - deb.torproject.org-keyring
       - tor
-    state: present
 
 # Bug: Tor needs to stop trying to read directories before it changes users
 # https://trac.torproject.org/projects/tor/ticket/22331

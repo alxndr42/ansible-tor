@@ -3,7 +3,7 @@
 Installs Tor relays on Debian-based systems.
 
 This role uses the default Tor instance (configuration in _/etc/tor/torrc_)
-only for hidden services and optionally a SOCKS proxy. Bridge, middle and exit
+for hidden services and optionally a SOCKS proxy. Bridge, middle and exit
 relays are created as additional instances using the _tor-instance-create_
 script (configuration under _/etc/tor/instances_).
 
@@ -36,21 +36,6 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>Exit instance definitions (see below).</td>
 </tr>
 <tr>
-  <td>tor_exit_policy</td>
-  <td>List of global <tt>ExitPolicy</tt> values (exits only).</td>
-</tr>
-<tr>
-  <td>tor_reduced_exit_policy</td>
-  <td>
-    Global <tt>ReducedExitPolicy</tt> value, if <tt>tor_exit_policy</tt> is
-    undefined (exits only).
-  </td>
-</tr>
-<tr>
-  <td>tor_my_family</td>
-  <td>List of fingerprints for <tt>MyFamily</tt>.</td>
-</tr>
-<tr>
   <td>tor_offline_keys</td>
   <td>Local base directory for offline keys (see below).</td>
 </tr>
@@ -66,8 +51,8 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 <tr>
   <td>tor_apparmor</td>
   <td>
-    Disable AppArmor, in case Tor is running in an LXC container.
-    (<a href="https://trac.torproject.org/projects/tor/ticket/17754">Bug 17754</a>)
+    Set to <tt>false</tt> to disable AppArmor, in case Tor is running in an LXC
+    container. (<a href="https://trac.torproject.org/projects/tor/ticket/17754">Bug 17754</a>)
   </td>
 </tr>
 <tr>
@@ -76,7 +61,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_default_hidden_services</td>
-  <td>Hidden service definitions (see below).</td>
+  <td>Hidden service definitions for the default instance (see below).</td>
 </tr>
 <tr>
   <td>tor_default_socks_port</td>
@@ -91,11 +76,19 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>Local HTML file used as <tt>DirPortFrontPage</tt> on exit instances.</td>
 </tr>
 <tr>
+  <td>tor_exit_policy</td>
+  <td>List of <tt>ExitPolicy</tt> values (exits only).</td>
+</tr>
+<tr>
   <td>tor_exit_policy_blocks</td>
   <td>
     <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before the exit
     policy on exit instances.
   </td>
+</tr>
+<tr>
+  <td>tor_my_family</td>
+  <td>List of fingerprints for <tt>MyFamily</tt>.</td>
 </tr>
 <tr>
   <td>tor_nameservers</td>
@@ -112,6 +105,13 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 <tr>
   <td>tor_packages_extra</td>
   <td>Extra system packages to install.</td>
+</tr>
+<tr>
+  <td>tor_reduced_exit_policy</td>
+  <td>
+    <tt>ReducedExitPolicy</tt> value, if <tt>tor_exit_policy</tt> is undefined
+    (exits only).
+  </td>
 </tr>
 </table>
 
@@ -193,8 +193,7 @@ Example:
 
 ### Middle/Exit Configuration
 
-The following properties are used by middle/exit instances (required properties
-in **bold**):
+The following properties are used by middle/exit instances:
 
 <table>
 <tr>
@@ -273,22 +272,43 @@ found in the local directory mentioned above, it is also copied to the host.
 Hidden services are only configured on the default instance via the
 `tor_default_hidden_services` variable.
 
+The following properties are used by hidden services (required properties in
+**bold**):
+
+<table>
+<tr>
+  <th>Property</th>
+  <th>Description</th>
+</tr>
+<tr>
+  <td><b>name</b></td>
+  <td>Hidden service name.</td>
+</tr>
+<tr>
+  <td><b>port</b></td>
+  <td>List of <tt>HiddenServicePort</tt> values.</td>
+</tr>
+<tr>
+  <td>authorize_client</td>
+  <td><tt>HiddenServiceAuthorizeClient</tt> value.</td>
+</tr>
+<tr>
+  <td>version</td>
+  <td><tt>HiddenServiceVersion</tt> value.</td>
+</tr>
+</table>
+
 Example:
 
     tor_default_hidden_services:
       - name: ssh
-        authorize_client: basic ssh
         ports: [22]
-        version: 3
 
 Result:
 
     HiddenServiceDir /var/lib/tor/hs_ssh/
-    HiddenServiceAuthorizeClient basic ssh
     HiddenServicePort 22
     HiddenServiceVersion 3
-
-The properties `authorize_client` and `version` are optional.
 
 ## License
 

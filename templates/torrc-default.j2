@@ -12,7 +12,7 @@ HeartbeatPeriod 1 hours
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
-SOCKSPort {{ tor_default_socks_port }}
+SOCKSPort {{ tor_default_socks_port | default(0) }}
 {% if tor_default_hidden_services %}
 
 ############### This section is just for location-hidden services ###
@@ -32,8 +32,6 @@ HiddenServiceAuthorizeClient {{ hs.authorize_client }}
 {% for port in hs.ports %}
 HiddenServicePort {{ port }}
 {% endfor %}
-{% if hs.version is defined %}
-HiddenServiceVersion {{ hs.version }}
-{% endif %}
+HiddenServiceVersion {{ hs.version | default(3) }}
 {% endfor %}
 {% endif %}
