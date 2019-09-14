@@ -51,7 +51,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 <tr>
   <td>tor_apparmor</td>
   <td>
-    Set to <tt>false</tt> to disable AppArmor, in case Tor is running in an LXC
+    Use <tt>false</tt> to disable AppArmor, in case Tor is running in an LXC
     container. (<a href="https://trac.torproject.org/projects/tor/ticket/17754">Bug 17754</a>)
   </td>
 </tr>
@@ -85,7 +85,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 <tr>
   <td>tor_exit_policy_blocks</td>
   <td>
-    <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before any
+    Use <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before any
     values from <tt>tor_exit_policy</tt> (exits only).
   </td>
 </tr>
@@ -238,13 +238,13 @@ See `man tor` for information on how to manage offline keys.
 
 Example:
 
-Using the default `tor_offline_keys` value, an inventory hostname of `tor-exit`
+Using the default `tor_offline_keys` value, an inventory hostname of `tor_exit`
 and an instance name of `exit`, offline keys would be generated with this
 command:
 
-    tor --DataDirectory ~/.tor_offline_keys/tor-exit/exit --keygen
+    tor --DataDirectory ~/.tor_offline_keys/tor_exit/exit --keygen
 
-**Please note:** Tor creates the RSA key `secret_id_key` for new relays. This
+**Please note:** Tor creates the RSA key `secret_id_key` on new relays. This
 key is part of the relay identity, so you should create a backup. If the key is
 found in the local directory mentioned above, it is also copied to the host.
 
@@ -266,7 +266,7 @@ The following properties are used by hidden services (required properties in
   <td>Hidden service name.</td>
 </tr>
 <tr>
-  <td><b>port</b></td>
+  <td><b>ports</b></td>
   <td>List of <tt>HiddenServicePort</tt> values.</td>
 </tr>
 <tr>
