@@ -1,6 +1,25 @@
-{% include 'instance-head.j2' %}
-{% include 'instance-dir-port.j2' %}
-{% include 'instance-my-family.j2' %}
+{% include 'instance-header.j2' %}
+{% if instance.dir_ports is defined %}
+
+## Uncomment this to mirror directory information for others. Please do
+## if you have enough bandwidth.
+{% for port in instance.dir_ports %}
+DirPort {{ port }}
+{% endfor %}
+{% endif %}
+{% if tor_my_family is defined %}
+
+## Uncomment this if you run more than one Tor relay, and add the identity
+## key fingerprint of each Tor relay you control, even if they're on
+## different networks. You declare it here so Tor clients can avoid
+## using more than one of your relays in a single circuit. See
+## https://www.torproject.org/docs/faq#MultipleRelays
+## However, you should never include a bridge's fingerprint here, as it would
+## break its concealability and potentially reveal its IP/TCP address.
+{% for fingerprint in tor_my_family %}
+MyFamily {{ fingerprint }}
+{% endfor %}
+{% endif %}
 
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.

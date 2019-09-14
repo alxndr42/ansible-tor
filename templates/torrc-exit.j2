@@ -1,6 +1,12 @@
-{% include 'instance-head.j2' %}
-{% include 'instance-dir-port.j2' %}
-{% if tor_exit_notice is defined and (instance.dir_ports is defined or instance.dir_port is defined) %}
+{% include 'instance-header.j2' %}
+{% if instance.dir_ports is defined %}
+
+## Uncomment this to mirror directory information for others. Please do
+## if you have enough bandwidth.
+{% for port in instance.dir_ports %}
+DirPort {{ port }}
+{% endfor %}
+{% if tor_exit_notice is defined %}
 
 ## Uncomment to return an arbitrary blob of html on your DirPort. Now you
 ## can explain what Tor is if anybody wonders why your IP address is
@@ -8,7 +14,20 @@
 ## distribution for a sample.
 DirPortFrontPage /etc/tor/tor-exit-notice.html
 {% endif %}
-{% include 'instance-my-family.j2' %}
+{% endif %}
+{% if tor_my_family is defined %}
+
+## Uncomment this if you run more than one Tor relay, and add the identity
+## key fingerprint of each Tor relay you control, even if they're on
+## different networks. You declare it here so Tor clients can avoid
+## using more than one of your relays in a single circuit. See
+## https://www.torproject.org/docs/faq#MultipleRelays
+## However, you should never include a bridge's fingerprint here, as it would
+## break its concealability and potentially reveal its IP/TCP address.
+{% for fingerprint in tor_my_family %}
+MyFamily {{ fingerprint }}
+{% endfor %}
+{% endif %}
 
 {% if instance.exit_addresses is defined %}
 ## IP address(es) to use for exit connections
