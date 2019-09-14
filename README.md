@@ -77,13 +77,16 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_exit_policy</td>
-  <td>List of <tt>ExitPolicy</tt> values (exits only).</td>
+  <td>
+    List of <tt>ExitPolicy</tt> values (exits only).
+    Overrides <tt>tor_reduced_exit_policy</tt>.
+  </td>
 </tr>
 <tr>
   <td>tor_exit_policy_blocks</td>
   <td>
-    <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before the exit
-    policy on exit instances.
+    <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before any
+    values from <tt>tor_exit_policy</tt> (exits only).
   </td>
 </tr>
 <tr>
@@ -108,10 +111,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_reduced_exit_policy</td>
-  <td>
-    <tt>ReducedExitPolicy</tt> value, if <tt>tor_exit_policy</tt> is undefined
-    (exits only).
-  </td>
+  <td><tt>ReducedExitPolicy</tt> value (exits only).</td>
 </tr>
 </table>
 
@@ -210,21 +210,6 @@ The following properties are used by middle/exit instances:
   <td>exit_addresses</td>
   <td>
       List of <tt>OutboundBindAddressExit</tt> values (exits only).
-  </td>
-</tr>
-<tr>
-  <td>exit_policy</td>
-  <td>
-    List of <tt>ExitPolicy</tt> values (exits only).<br>
-    Overrides global exit variables.
-  </td>
-</tr>
-<tr>
-  <td>reduced_exit_policy</td>
-  <td>
-    <tt>ReducedExitPolicy</tt> value, if <tt>exit_policy</tt> is undefined
-    (exits only).<br>
-    Overrides global exit variables.
   </td>
 </tr>
 <tr>
