@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.0.0
+-----
+* Replace some torrc variables with generic property
+* Remove instance-specific exit policy properties
+* Cleanup various files
+* Reorganize template files
+* Remove relay type-specific packages variables
+
 1.10.3
 ------
 * Make sure GnuPG is installed
