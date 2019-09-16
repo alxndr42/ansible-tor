@@ -67,11 +67,16 @@
     backup: yes
   notify: reload Tor
 
-- name: check for /etc/tor/exit-policy-blocks
-  stat: path=/etc/tor/exit-policy-blocks
+- name: check for local exit-policy-blocks
+  local_action:
+    module: stat
+    path: "{{ tor_offline_keys }}/{{ inventory_hostname }}/exit-policy-blocks"
+  become: no
   register: f
-- name: create /etc/tor/exit-policy-blocks
-  file:
-    path: /etc/tor/exit-policy-blocks
-    state: touch
-  when: not f.stat.exists and tor_exit_policy_blocks
+
+- name: copy local exit-policy-blocks
+  copy:
+    src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/exit-policy-blocks"
+    dest: /etc/tor/exit-policy-blocks
+  when: f.stat.exists
+  notify: reload Tor

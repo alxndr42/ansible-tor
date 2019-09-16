@@ -67,7 +67,7 @@ IPv6Exit {{ instance.ipv6_exit | default(0) }}
 ## See the man page entry for ExitPolicyRejectPrivate if you want to allow
 ## "exit enclaving".
 ##
-{% if tor_exit_policy_blocks %}
+{% if include_blocks %}
 %include /etc/tor/exit-policy-blocks
 {% endif %}
 {% for policy in tor_exit_policy %}

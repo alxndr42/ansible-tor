@@ -34,7 +34,13 @@
     group: _tor-{{ instance.name }}
   when: rsa_key.stat.exists
 
+- name: check for /etc/tor/exit-policy-blocks
+  stat: path=/etc/tor/exit-policy-blocks
+  register: f
+
 - name: template instance torrc
+  vars:
+    include_blocks: "{{ f.stat.exists }}"
   template:
     src: torrc-{{ type }}.j2
     dest: /etc/tor/instances/{{ instance.name }}/torrc

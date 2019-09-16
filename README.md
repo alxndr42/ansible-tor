@@ -83,13 +83,6 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   </td>
 </tr>
 <tr>
-  <td>tor_exit_policy_blocks</td>
-  <td>
-    Use <tt>true</tt> to include <i>/etc/tor/exit-policy-blocks</i> before any
-    values from <tt>tor_exit_policy</tt> (exits only).
-  </td>
-</tr>
-<tr>
   <td>tor_instance_settings</td>
   <td>List of settings to be added at the top of instance torrc files.</td>
 </tr>
@@ -229,6 +222,15 @@ Example:
           - "accept *:443"
           [...]
           - "reject *:*"
+
+### Exit Policy Blocks
+
+If the file */etc/tor/exit-policy-blocks* exists, it will be included in
+instance torrc files before any `tor_exit_policy` values. You can use this to
+place `ExitPolicy reject` statements in front of your exit policy.
+
+If the local file `{{ tor_offline_keys }}/{{ inventory_hostname }}/exit-policy-blocks`
+exists, it will be copied to */etc/tor/exit-policy-blocks* on the host.
 
 ## Offline Keys
 
