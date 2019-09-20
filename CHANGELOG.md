@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.0
+-----
+* Copy and auto-include local exit-policy-blocks
+
 2.0.0
 -----
 * Replace some torrc variables with generic property
