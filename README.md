@@ -236,15 +236,9 @@ exists, it will be copied to */etc/tor/exit-policy-blocks* on the host.
 
 A given host's and instance's offline keys are copied from the local directory
 `{{ tor_offline_keys }}/{{ inventory_hostname }}/INSTANCE_NAME/keys`.
-See `man tor` for information on how to manage offline keys.
 
-Example:
-
-Using the default `tor_offline_keys` value, an inventory hostname of `tor_exit`
-and an instance name of `exit`, offline keys would be generated with this
-command:
-
-    tor --DataDirectory ~/.tor_offline_keys/tor_exit/exit --keygen
+You can use the included script [tor-keygen](scripts/tor-keygen) to create and
+update offline keys.
 
 **Please note:** Tor creates the RSA key `secret_id_key` on new relays. This
 key is part of the relay identity, so you should create a backup. If the key is
@@ -273,7 +267,9 @@ The following properties are used by hidden services (required properties in
 </tr>
 <tr>
   <td>authorize_client</td>
-  <td><tt>HiddenServiceAuthorizeClient</tt> value.</td>
+  <td>
+    <tt>HiddenServiceAuthorizeClient</tt> value (v2 hidden services only).
+  </td>
 </tr>
 <tr>
   <td>version</td>
@@ -292,6 +288,9 @@ Result:
     HiddenServiceDir /var/lib/tor/hs_ssh/
     HiddenServicePort 22
     HiddenServiceVersion 3
+
+You can use the included script [tor-onion-auth](scripts/tor-onion-auth) to
+create v3 hidden service [authorization files](https://2019.www.torproject.org/docs/tor-manual.html.en#_client_authorization).
 
 ## License
 

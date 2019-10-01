@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+  echo "Usage: tor-onion-auth <onion_address> <client_name>"
+  echo ""
+  echo "Creates v3 hidden service authorization files."
+  exit
+fi
+
+ONION_ADDRESS=$(echo $1 | sed -e 's/\.onion//')
+CLIENT_NAME=$2
+PKEY=pkey.tmp
+
+openssl genpkey -algorithm x25519 -out $PKEY
+PRIVATE_KEY=$(openssl pkey -in $PKEY -outform DER | tail -c32 | base32 | tr -d '=')
+PUBLIC_KEY=$(openssl pkey -in $PKEY -outform DER -pubout | tail -c32 | base32 | tr -d '=')
+echo "$ONION_ADDRESS:descriptor:x25519:$PRIVATE_KEY" > "$CLIENT_NAME.auth_private"
+echo "descriptor:x25519:$PUBLIC_KEY" > "$CLIENT_NAME.auth"
+rm -f $PKEY

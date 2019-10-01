@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "Usage: tor-keygen <data_directory> [lifetime_days]"
+  echo ""
+  echo "Creates or updates relay keys under the given data directory."
+  echo "The default lifetime is 35 days."
+  exit
+fi
+
+DATA_DIRECTORY="$1"
+LIFETIME_DAYS="35"
+
+if [ $# -gt 1 ]; then
+  LIFETIME_DAYS="$2"
+fi
+
+tor --datadirectory "$DATA_DIRECTORY" --signingkeylifetime "$LIFETIME_DAYS days" --keygen
