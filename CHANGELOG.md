@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.0
+-----
+* Add offline key and v3 HS auth creation scripts.
+
 2.1.0
 -----
 * Copy and auto-include local exit-policy-blocks
