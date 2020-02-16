@@ -1,9 +1,13 @@
 Changelog
 =========
 
+2.3.0
+-----
+* Add v3 HS client authorization properties
+
 2.2.0
 -----
-* Add offline key and v3 HS auth creation scripts.
+* Add offline key and v3 HS auth creation scripts
 
 2.1.0
 -----

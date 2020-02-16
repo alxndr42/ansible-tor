@@ -3,9 +3,12 @@
 ##
 ## Tor will look for this file in various places based on your platform:
 ## https://www.torproject.org/docs/faq#torrc
-{% if tor_avoid_disk %}
 
+{% if tor_avoid_disk %}
 AvoidDiskWrites 1
+{% endif %}
+{% if tor_default_client_onion_auth %}
+ClientOnionAuthDir /var/lib/tor/onion_auth
 {% endif %}
 
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't

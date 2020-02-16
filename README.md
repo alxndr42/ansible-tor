@@ -60,6 +60,10 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>Set <tt>AvoidDiskWrites</tt>, for flash-based systems. </td>
 </tr>
 <tr>
+  <td>tor_default_client_onion_auth</td>
+  <td>Client authorizations for the default instance (see below).</td>
+</tr>
+<tr>
   <td>tor_default_hidden_services</td>
   <td>Hidden service definitions for the default instance (see below).</td>
 </tr>
@@ -97,6 +101,10 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
     will be used by bridge, middle and exit instances as
     <tt>ServerDNSResolvConfFile</tt>.
   </td>
+</tr>
+<tr>
+  <td>tor_onion_auth</td>
+  <td>Local directory for client authorization files (see below).</td>
 </tr>
 <tr>
   <td>tor_packages_extra</td>
@@ -272,6 +280,10 @@ The following properties are used by hidden services (required properties in
   </td>
 </tr>
 <tr>
+  <td>authorized_clients</td>
+  <td>List of client authorizations (v3 hidden services only).</td>
+</tr>
+<tr>
   <td>version</td>
   <td><tt>HiddenServiceVersion</tt> value.</td>
 </tr>
@@ -289,8 +301,25 @@ Result:
     HiddenServicePort 22
     HiddenServiceVersion 3
 
+### Client Authorization
+
 You can use the included script [tor-onion-auth](scripts/tor-onion-auth) to
 create v3 hidden service [authorization files](https://2019.www.torproject.org/docs/tor-manual.html.en#_client_authorization).
+
+Example:
+
+    tor-onion-auth 1234example.onion my-client
+
+Private authorization files for a Tor client are configured like this:
+
+    tor_default_client_onion_auth: [my-client, my-other-client]
+
+Public authorization files for a Tor hidden service are configured like this:
+
+    tor_default_hidden_services:
+      - name: http
+        ports: [80]
+        authorized_clients: [my-client, my-other-client]
 
 ## License
 

@@ -80,3 +80,23 @@
     dest: /etc/tor/exit-policy-blocks
   when: f.stat.exists
   notify: reload Tor
+
+- name: copy HS auth public keys
+  copy:
+    src: "{{ tor_onion_auth }}/{{ item[1] }}.auth"
+    dest: /var/lib/tor/hs_{{ item[0].name }}/authorized_clients/
+    directory_mode: 02700
+    owner: debian-tor
+    group: debian-tor
+  loop: "{{ tor_default_hidden_services | subelements('authorized_clients', skip_missing=True) }}"
+  notify: reload Tor
+
+- name: copy HS auth private keys
+  copy:
+    src: "{{ tor_onion_auth }}/{{ item }}.auth_private"
+    dest: /var/lib/tor/onion_auth/
+    directory_mode: 02700
+    owner: debian-tor
+    group: debian-tor
+  loop: "{{ tor_default_client_onion_auth }}"
+  notify: reload Tor
