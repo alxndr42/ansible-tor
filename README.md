@@ -233,12 +233,9 @@ Example:
 
 ### Exit Policy Blocks
 
-If the file */etc/tor/exit-policy-blocks* exists, it will be included in
+On exit instances, the file */etc/tor/exit-policy-blocks* will be included in
 instance torrc files before any `tor_exit_policy` values. You can use this to
 place `ExitPolicy reject` statements in front of your exit policy.
-
-If the local file `{{ tor_offline_keys }}/{{ inventory_hostname }}/exit-policy-blocks`
-exists, it will be copied to */etc/tor/exit-policy-blocks* on the host.
 
 ## Offline Keys
 

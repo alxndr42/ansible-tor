@@ -67,19 +67,13 @@
     backup: yes
   notify: reload Tor
 
-- name: check for local exit-policy-blocks
-  local_action:
-    module: stat
-    path: "{{ tor_offline_keys }}/{{ inventory_hostname }}/exit-policy-blocks"
-  become: no
-  register: f
-
-- name: copy local exit-policy-blocks
-  copy:
-    src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/exit-policy-blocks"
-    dest: /etc/tor/exit-policy-blocks
-  when: f.stat.exists
-  notify: reload Tor
+- name: initialize exit-policy-blocks
+  file:
+    path: /etc/tor/exit-policy-blocks
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+  when: tor_instances_exit | list
 
 - name: copy HS auth public keys
   copy:
