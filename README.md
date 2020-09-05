@@ -213,6 +213,12 @@ The following properties are used by middle/exit instances:
   <td>ipv6_exit</td>
   <td>Allow IPv6 exit traffic (exits only).</td>
 </tr>
+<tr>
+  <td>outbound_addresses</td>
+  <td>
+      List of <tt>OutboundBindAddress</tt> values.
+  </td>
+</tr>
 </table>
 
 Example:

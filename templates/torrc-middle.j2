@@ -21,6 +21,13 @@ MyFamily {{ fingerprint }}
 {% endfor %}
 {% endif %}
 
+{% if instance.outbound_addresses is defined %}
+## IP address(es) to use for outbound connections
+{% for address in instance.outbound_addresses %}
+OutboundBindAddress {{ address }}
+{% endfor %}
+
+{% endif %}
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.
 ExitPolicy reject *:* # no exits allowed

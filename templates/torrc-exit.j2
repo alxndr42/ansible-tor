@@ -29,6 +29,13 @@ MyFamily {{ fingerprint }}
 {% endfor %}
 {% endif %}
 
+{% if instance.outbound_addresses is defined %}
+## IP address(es) to use for outbound connections
+{% for address in instance.outbound_addresses %}
+OutboundBindAddress {{ address }}
+{% endfor %}
+
+{% endif %}
 {% if instance.exit_addresses is defined %}
 ## IP address(es) to use for exit connections
 {% for address in instance.exit_addresses %}
