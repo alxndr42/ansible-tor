@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.4.0
+-----
+* Add outbound_addresses instance variable
+* Remove copying exit-policy-blocks
+
 2.3.0
 -----
 * Add v3 HS client authorization properties
