@@ -22,7 +22,7 @@ MyFamily {{ fingerprint }}
 {% endif %}
 
 {% if instance.outbound_addresses is defined %}
-## IP address(es) to use for outbound connections
+## IP address(es) to use for outbound connections.
 {% for address in instance.outbound_addresses %}
 OutboundBindAddress {{ address }}
 {% endfor %}

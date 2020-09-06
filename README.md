@@ -198,15 +198,15 @@ The following properties are used by middle/exit instances:
   <th>Description</th>
 </tr>
 <tr>
-  <td>dir_ports</td>
+  <td>address</td>
   <td>
-      List of <tt>DirPort</tt> values (only one can be advertised).
+      The IPv4 address of this server.
   </td>
 </tr>
 <tr>
-  <td>exit_addresses</td>
+  <td>dir_ports</td>
   <td>
-      List of <tt>OutboundBindAddressExit</tt> values (exits only).
+      List of <tt>DirPort</tt> values (only one can be advertised).
   </td>
 </tr>
 <tr>

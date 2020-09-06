@@ -27,6 +27,11 @@ SOCKSPort 0
 #
 ## See https://www.torproject.org/docs/tor-doc-relay for details.
 
+{% if instance.address is defined %}
+## The IPv4 address of this server.
+Address {{ instance.address }}
+
+{% endif %}
 ## Required: what port to advertise for incoming Tor connections.
 {% for port in instance.or_ports %}
 ORPort {{ port }}
