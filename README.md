@@ -57,7 +57,11 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_avoid_disk</td>
-  <td>Set <tt>AvoidDiskWrites</tt>, for flash-based systems. </td>
+  <td>Set <tt>AvoidDiskWrites</tt>, for flash-based systems.</td>
+</tr>
+<tr>
+  <td>tor_contact_info</td>
+  <td><tt>ContactInfo</tt> value, overwritten by instance configuration.</td>
 </tr>
 <tr>
   <td>tor_default_client_onion_auth</td>
