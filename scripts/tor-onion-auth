@@ -7,7 +7,7 @@ if [ $# -ne 2 ]; then
   exit
 fi
 
-ONION_ADDRESS=$(echo $1 | sed -e 's/\.onion//')
+ONION_ADDRESS=${1//.onion/}
 CLIENT_NAME=$2
 PKEY=pkey.tmp
 
