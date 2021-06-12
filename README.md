@@ -281,18 +281,8 @@ The following properties are used by hidden services (required properties in
   <td>List of <tt>HiddenServicePort</tt> values.</td>
 </tr>
 <tr>
-  <td>authorize_client</td>
-  <td>
-    <tt>HiddenServiceAuthorizeClient</tt> value (v2 hidden services only).
-  </td>
-</tr>
-<tr>
   <td>authorized_clients</td>
-  <td>List of client authorizations (v3 hidden services only).</td>
-</tr>
-<tr>
-  <td>version</td>
-  <td><tt>HiddenServiceVersion</tt> value.</td>
+  <td>List of client authorizations.</td>
 </tr>
 </table>
 
