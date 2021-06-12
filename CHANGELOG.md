@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.5.0
+-----
+* Remove support for v2 Hidden Services
+* Remove exit_addresses instance variable
+* Add address instance variable
+* Add tor_contact_info variable
+
 2.4.0
 -----
 * Add outbound_addresses instance variable
