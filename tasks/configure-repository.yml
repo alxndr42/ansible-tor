@@ -1,0 +1,19 @@
+---
+- name: install GnuPG
+  apt:
+    name:
+      - gnupg
+
+- name: add signing key
+  apt_key:
+    url: https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc
+    id: A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+
+- name: add repository
+  apt_repository:
+    repo: deb http://deb.torproject.org/torproject.org {{ tor_dist }} main
+
+- name: install keyring
+  apt:
+    name:
+      - deb.torproject.org-keyring

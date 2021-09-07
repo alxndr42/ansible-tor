@@ -10,3 +10,4 @@ tor_instances_middle: []
 tor_offline_keys: ~/.tor_offline_keys
 tor_onion_auth: ~/.tor_onion_auth
 tor_packages_extra: []
+tor_repository: true

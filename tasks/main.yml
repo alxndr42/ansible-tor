@@ -4,7 +4,12 @@
     name: "{{ tor_packages_extra }}"
   when: tor_packages_extra | list
 
-- include: install-tor.yml
+- name: configure Tor Project repository
+  include: configure-repository.yml
+  when: tor_repository
+
+- name: install tor
+  include: install-tor.yml
 
 - name: create bridge instances
   include: create-instance.yml

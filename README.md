@@ -118,6 +118,10 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>tor_reduced_exit_policy</td>
   <td><tt>ReducedExitPolicy</tt> value (exits only).</td>
 </tr>
+<tr>
+  <td>tor_repository</td>
+  <td>Use the Tor Project package repository.</td>
+</tr>
 </table>
 
 ## Instance Configuration
