@@ -179,6 +179,10 @@ The following properties are used by bridge instances (required properties in
   <th>Description</th>
 </tr>
 <tr>
+  <td>ext_or_port</td>
+  <td><tt>ExtORPort</tt> value.</td>
+</tr>
+<tr>
   <td><b>pluggable_transports</b></td>
   <td>List of pluggable transport definitions (see below).</td>
 </tr>
