@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.6.0
+-----
+* Remove per-instance contact_info variable
+* Add ext_or_port for bridges
+* Add tor_repository variable
+* Add tags for skipping certain tasks
+
 2.5.0
 -----
 * Remove support for v2 Hidden Services
