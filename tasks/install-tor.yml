@@ -1,6 +1,6 @@
 ---
 # Bug: 0.2.7.5 cannot work inside lxc container
-# https://trac.torproject.org/projects/tor/ticket/17754
+# https://gitlab.torproject.org/tpo/core/tor/-/issues/17754
 - name: copy AppArmor override
   copy:
     src: apparmor-override.conf
@@ -13,7 +13,7 @@
       - tor
 
 # Bug: Tor needs to stop trying to read directories before it changes users
-# https://trac.torproject.org/projects/tor/ticket/22331
+# https://gitlab.torproject.org/tpo/core/tor/-/issues/22331
 - name: check for local AppArmor config
   stat: path=/etc/apparmor.d/local/system_tor
   register: f
