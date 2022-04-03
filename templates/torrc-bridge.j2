@@ -1,4 +1,4 @@
-{% include 'instance-header.j2' %}
+{% include 'instance-header.j2' +%}
 
 ## A comma-separated list of exit policies. They're considered first
 ## to last, and the first match wins.
@@ -11,7 +11,7 @@ ExitPolicy reject *:* # no exits allowed
 ## differently because they won't know you're running Tor. If you can
 ## be a real relay, please do; but if not, be a bridge!
 BridgeRelay 1
-ExtORPort {{ instance.ext_or_port|default('auto') }}
+ExtORPort {{ instance.ext_or_port | default('auto') }}
 {% for pt in instance.pluggable_transports %}
 
 ServerTransportPlugin {{ pt.name }} exec {{ pt.exec }}

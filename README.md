@@ -9,8 +9,8 @@ script (configuration under _/etc/tor/instances_).
 
 ## Requirements
 
-* Debian-based system with systemd
-* Offline keys as described below
+- Debian-based system with systemd
+- Offline keys as described below
 
 ## Role Variables
 
@@ -22,6 +22,10 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 <tr>
   <th>Variable</th>
   <th>Description</th>
+</tr>
+<tr>
+  <td>tor_contact_info</td>
+  <td><tt>ContactInfo</tt> value.</td>
 </tr>
 <tr>
   <td>tor_instances_bridge</td>
@@ -52,16 +56,12 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>tor_apparmor</td>
   <td>
     Use <tt>false</tt> to disable AppArmor, in case Tor is running in an LXC
-    container. (<a href="https://trac.torproject.org/projects/tor/ticket/17754">Bug 17754</a>)
+    container. (<a href="https://gitlab.torproject.org/tpo/core/tor/-/issues/17754">Bug 17754</a>)
   </td>
 </tr>
 <tr>
   <td>tor_avoid_disk</td>
   <td>Set <tt>AvoidDiskWrites</tt>, for flash-based systems.</td>
-</tr>
-<tr>
-  <td>tor_contact_info</td>
-  <td><tt>ContactInfo</tt> value, overwritten by instance configuration.</td>
 </tr>
 <tr>
   <td>tor_default_client_onion_auth</td>
@@ -92,7 +92,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 </tr>
 <tr>
   <td>tor_instance_settings</td>
-  <td>List of settings to be added at the top of instance torrc files.</td>
+  <td>List of additional settings for bridge, middle and exit instances.</td>
 </tr>
 <tr>
   <td>tor_my_family</td>
@@ -162,10 +162,6 @@ in **bold**):
   <td>relay_bandwidth_burst</td>
   <td><tt>RelayBandwidthBurst</tt> value.</td>
 </tr>
-<tr>
-  <td>contact_info</td>
-  <td><tt>ContactInfo</tt> value.</td>
-</tr>
 </table>
 
 ### Bridge Configuration
@@ -190,15 +186,16 @@ The following properties are used by bridge instances (required properties in
 
 Example:
 
-    tor_instances_bridge:
-      - name: bridge
-        nickname: MyCoolBridge
-        or_ports: [9000]
-        contact_info: "Foo <foo@example.com>"
-        pluggable_transports:
-          - name: obfs4
-            exec: /usr/bin/obfs4proxy
-            address: 0.0.0.0:8443
+```yaml
+tor_instances_bridge:
+  - name: bridge
+    nickname: MyCoolBridge
+    or_ports: [9000]
+    pluggable_transports:
+      - name: obfs4
+        exec: /usr/bin/obfs4proxy
+        address: 0.0.0.0:8443
+```
 
 ### Middle/Exit Configuration
 
@@ -235,19 +232,20 @@ The following properties are used by middle/exit instances:
 
 Example:
 
-    tor_instances_exit:
-      - name: exit
-        nickname: MyCoolExit
-        contact_info: "Foo <foo@example.com>"
-        or_ports:
-          - 443
-          - "[abcd::1:2:3:4]:443"
-        ipv6_exit: 1
-        exit_policy:
-          - "accept *:80"
-          - "accept *:443"
-          [...]
-          - "reject *:*"
+```yaml
+tor_instances_exit:
+  - name: exit
+    nickname: MyCoolExit
+    or_ports:
+      - 443
+      - "[abcd::1:2:3:4]:443"
+    ipv6_exit: 1
+    exit_policy:
+      - "accept *:80"
+      - "accept *:443"
+      [...]
+      - "reject *:*"
+```
 
 ### Exit Policy Blocks
 
@@ -296,15 +294,18 @@ The following properties are used by hidden services (required properties in
 
 Example:
 
-    tor_default_hidden_services:
-      - name: ssh
-        ports: [22]
-
+```yaml
+tor_default_hidden_services:
+  - name: ssh
+    ports: [22]
+```
 Result:
 
-    HiddenServiceDir /var/lib/tor/hs_ssh/
-    HiddenServicePort 22
-    HiddenServiceVersion 3
+```
+HiddenServiceDir /var/lib/tor/hs_ssh/
+HiddenServicePort 22
+HiddenServiceVersion 3
+```
 
 ### Client Authorization
 
@@ -313,18 +314,24 @@ create v3 hidden service [authorization files](https://2019.www.torproject.org/d
 
 Example:
 
-    tor-onion-auth 1234example.onion my-client
+```bash
+tor-onion-auth 1234example.onion my-client
+````
 
 Private authorization files for a Tor client are configured like this:
 
-    tor_default_client_onion_auth: [my-client, my-other-client]
+```yaml
+tor_default_client_onion_auth: [my-client, my-other-client]
+```
 
 Public authorization files for a Tor hidden service are configured like this:
 
-    tor_default_hidden_services:
-      - name: http
-        ports: [80]
-        authorized_clients: [my-client, my-other-client]
+```yaml
+tor_default_hidden_services:
+  - name: http
+    ports: [80]
+    authorized_clients: [my-client, my-other-client]
+```
 
 ## License
 
