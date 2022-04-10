@@ -18,7 +18,7 @@
   loop: "{{ tor_instances_bridge }}"
   loop_control:
     loop_var: instance
-  tags: [bridge-relays]
+  tags: [bridge-instances, tor-instances]
 
 - name: create middle instances
   include: create-instance.yml
@@ -27,7 +27,7 @@
   loop: "{{ tor_instances_middle }}"
   loop_control:
     loop_var: instance
-  tags: [middle-relays]
+  tags: [middle-instances, tor-instances]
 
 - name: create exit instances
   include: create-instance.yml
@@ -36,4 +36,4 @@
   loop: "{{ tor_instances_exit }}"
   loop_control:
     loop_var: instance
-  tags: [exit-relays]
+  tags: [exit-instances, tor-instances]
