@@ -80,10 +80,6 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
   <td>Distribution name on <a href="https://deb.torproject.org/torproject.org/dists/">deb.torproject.org</a>.</td>
 </tr>
 <tr>
-  <td>tor_exit_notice</td>
-  <td>Local HTML file used as <tt>DirPortFrontPage</tt> on exit instances.</td>
-</tr>
-<tr>
   <td>tor_exit_policy</td>
   <td>
     List of <tt>ExitPolicy</tt> values (exits only).
@@ -210,12 +206,6 @@ The following properties are used by middle/exit instances:
   <td>address</td>
   <td>
       The IPv4 address of this server.
-  </td>
-</tr>
-<tr>
-  <td>dir_ports</td>
-  <td>
-      List of <tt>DirPort</tt> values (only one can be advertised).
   </td>
 </tr>
 <tr>

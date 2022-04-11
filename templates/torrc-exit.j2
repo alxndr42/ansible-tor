@@ -1,20 +1,4 @@
 {% include 'instance-header.j2' +%}
-{% if instance.dir_ports is defined %}
-
-## Uncomment this to mirror directory information for others. Please do
-## if you have enough bandwidth.
-{% for port in instance.dir_ports %}
-DirPort {{ port }}
-{% endfor %}
-{% if tor_exit_notice is defined %}
-
-## Uncomment to return an arbitrary blob of html on your DirPort. Now you
-## can explain what Tor is if anybody wonders why your IP address is
-## contacting them. See contrib/tor-exit-notice.html in Tor's source
-## distribution for a sample.
-DirPortFrontPage /etc/tor/tor-exit-notice.html
-{% endif %}
-{% endif %}
 {% if tor_my_family is defined %}
 
 ## Uncomment this if you run more than one Tor relay, and add the identity
