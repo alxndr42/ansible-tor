@@ -230,11 +230,12 @@ tor_instances_exit:
       - 443
       - "[abcd::1:2:3:4]:443"
     ipv6_exit: 1
-    exit_policy:
-      - "accept *:80"
-      - "accept *:443"
-      [...]
-      - "reject *:*"
+
+tor_exit_policy:
+  - "accept *:80"
+  - "accept *:443"
+  [...]
+  - "reject *:*"
 ```
 
 ### Exit Policy Blocks
