@@ -37,6 +37,11 @@ Address {{ instance.address }}
 ORPort {{ port }}
 {% endfor %}
 
+{% if instance.metrics_port is defined %}
+MetricsPort {{ instance.metrics_port }}
+MetricsPortPolicy {{ instance.metrics_port_policy }}
+
+{% endif %}
 ## A handle for your relay, so people don't have to refer to it by key.
 ## Nicknames must be between 1 and 19 characters inclusive, and must
 ## contain only the characters [a-zA-Z0-9].

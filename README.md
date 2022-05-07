@@ -147,6 +147,14 @@ in **bold**):
   <td>List of <tt>ORPort</tt> values.</td>
 </tr>
 <tr>
+  <td>metrics_port</td>
+  <td><tt>MetricsPort</tt> value.</td>
+</tr>
+<tr>
+  <td>metrics_port_policy</td>
+  <td><tt>MetricsPortPolicy</tt> value.</td>
+</tr>
+<tr>
   <td>nickname</td>
   <td>Relay nickname.</td>
 </tr>
