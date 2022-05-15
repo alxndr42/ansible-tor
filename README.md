@@ -1,11 +1,11 @@
 # ansible-tor
 
-Installs Tor relays on Debian-based systems.
+Installs Tor relays on Debian-based systems with systemd.
 
-This role uses the default Tor instance (configuration in _/etc/tor/torrc_)
+This role uses the default Tor instance (configuration in */etc/tor/torrc*)
 for hidden services and optionally a SOCKS proxy. Bridge, middle and exit
-relays are created as additional instances using the _tor-instance-create_
-script (configuration under _/etc/tor/instances_).
+relays are created as additional instances using the *tor-instance-create*
+script (configuration under */etc/tor/instances*).
 
 ## Requirements
 
@@ -18,175 +18,60 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 
 ### Main Variables
 
-<table>
-<tr>
-  <th>Variable</th>
-  <th>Description</th>
-</tr>
-<tr>
-  <td>tor_contact_info</td>
-  <td><tt>ContactInfo</tt> value.</td>
-</tr>
-<tr>
-  <td>tor_instances_bridge</td>
-  <td>Bridge instance definitions (see below).</td>
-</tr>
-<tr>
-  <td>tor_instances_middle</td>
-  <td>Middle instance definitions (see below).</td>
-</tr>
-<tr>
-  <td>tor_instances_exit</td>
-  <td>Exit instance definitions (see below).</td>
-</tr>
-<tr>
-  <td>tor_offline_keys</td>
-  <td>Local base directory for offline keys (see below).</td>
-</tr>
-</table>
+| Variable | Description |
+| --- | --- |
+| `tor_contact_info` | `ContactInfo` value. |
+| `tor_instances_bridge` | Bridge instance definitions (see below). |
+| `tor_instances_middle` | Middle instance definitions (see below). |
+| `tor_instances_exit` | Exit instance definitions (see below). |
+| `tor_offline_keys` | Local base directory for offline keys (see below). |
 
 ### Other Variables
 
-<table>
-<tr>
-  <th>Variable</th>
-  <th>Description</th>
-</tr>
-<tr>
-  <td>tor_apparmor</td>
-  <td>
-    Use <tt>false</tt> to disable AppArmor, in case Tor is running in an LXC
-    container. (<a href="https://gitlab.torproject.org/tpo/core/tor/-/issues/17754">Bug 17754</a>)
-  </td>
-</tr>
-<tr>
-  <td>tor_avoid_disk</td>
-  <td>Set <tt>AvoidDiskWrites</tt>, for flash-based systems.</td>
-</tr>
-<tr>
-  <td>tor_default_client_onion_auth</td>
-  <td>Client authorizations for the default instance (see below).</td>
-</tr>
-<tr>
-  <td>tor_default_hidden_services</td>
-  <td>Hidden service definitions for the default instance (see below).</td>
-</tr>
-<tr>
-  <td>tor_default_socks_port</td>
-  <td>SOCKS port of the default instance.</td>
-</tr>
-<tr>
-  <td>tor_dist</td>
-  <td>Distribution name on <a href="https://deb.torproject.org/torproject.org/dists/">deb.torproject.org</a>.</td>
-</tr>
-<tr>
-  <td>tor_exit_policy</td>
-  <td>
-    List of <tt>ExitPolicy</tt> values (exits only).
-    Overrides <tt>tor_reduced_exit_policy</tt>.
-  </td>
-</tr>
-<tr>
-  <td>tor_instance_settings</td>
-  <td>List of additional settings for bridge, middle and exit instances.</td>
-</tr>
-<tr>
-  <td>tor_my_family</td>
-  <td>List of fingerprints for <tt>MyFamily</tt>.</td>
-</tr>
-<tr>
-  <td>tor_nameservers</td>
-  <td>
-    List of nameserver addresses to add to <i>/etc/tor/resolv.conf</i>, which
-    will be used by bridge, middle and exit instances as
-    <tt>ServerDNSResolvConfFile</tt>.
-  </td>
-</tr>
-<tr>
-  <td>tor_onion_auth</td>
-  <td>Local directory for client authorization files (see below).</td>
-</tr>
-<tr>
-  <td>tor_packages_extra</td>
-  <td>Extra system packages to install.</td>
-</tr>
-<tr>
-  <td>tor_reduced_exit_policy</td>
-  <td><tt>ReducedExitPolicy</tt> value (exits only).</td>
-</tr>
-<tr>
-  <td>tor_repository</td>
-  <td>Use the Tor Project package repository.</td>
-</tr>
-</table>
+| Variable | Description |
+| --- | --- |
+| `tor_apparmor` | Use `false` to disable AppArmor, in case Tor is running in an LXC container. ([Bug 17754](https://gitlab.torproject.org/tpo/core/tor/-/issues/17754)) |
+| `tor_avoid_disk` | Set `AvoidDiskWrites`, for flash-based systems. |
+| `tor_default_client_onion_auth` | Client authorizations for the default instance (see below). |
+| `tor_default_hidden_services` | Hidden service definitions for the default instance (see below). |
+| `tor_default_socks_port` | SOCKS port of the default instance. |
+| `tor_dist` | Distribution name on [deb.torproject.org](https://deb.torproject.org/torproject.org/dists/). |
+| `tor_exit_policy` | List of `ExitPolicy` values (exits only). Overrides `tor_reduced_exit_policy`. |
+| `tor_instance_settings` | List of additional settings for bridge, middle and exit instances. |
+| `tor_my_family` | List of fingerprints for `MyFamily`. |
+| `tor_nameservers` | List of nameserver addresses to add to */etc/tor/resolv.conf*, which will be used by bridge, middle and exit instances as `ServerDNSResolvConfFile`. |
+| `tor_onion_auth` | Local directory for client authorization files (see below). |
+| `tor_packages_extra` | Extra system packages to install. |
+| `tor_reduced_exit_policy` | `ReducedExitPolicy` value (exits only). |
+| `tor_repository` | Use the Tor Project package repository. |
 
 ## Instance Configuration
 
-Bridge, middle and exit relays are created using the _tor-instance-create_
+Bridge, middle and exit relays are created using the *tor-instance-create*
 script and configured via three separate variables in the inventory (see above).
 
 The following properties are common to all instance types (required properties
 in **bold**):
 
-<table>
-<tr>
-  <th>Property</th>
-  <th>Description</th>
-</tr>
-<tr>
-  <td><b>name</b></td>
-  <td>
-    Instance name. Example: the instance name <tt>foo</tt> will create the
-    systemd unit <tt>tor@foo</tt> owned by user/group <tt>_tor-foo</tt>.
-    The configuration will be in <i>/etc/tor/instances/foo/torrc</i>, the data
-    in <i>/var/lib/tor-instances/foo</i>.
-  </td>
-</tr>
-<tr>
-  <td><b>or_ports</b></td>
-  <td>List of <tt>ORPort</tt> values.</td>
-</tr>
-<tr>
-  <td>metrics_port</td>
-  <td><tt>MetricsPort</tt> value.</td>
-</tr>
-<tr>
-  <td>metrics_port_policy</td>
-  <td><tt>MetricsPortPolicy</tt> value.</td>
-</tr>
-<tr>
-  <td>nickname</td>
-  <td>Relay nickname.</td>
-</tr>
-<tr>
-  <td>relay_bandwidth_rate</td>
-  <td><tt>RelayBandwidthRate</tt> value.</td>
-</tr>
-<tr>
-  <td>relay_bandwidth_burst</td>
-  <td><tt>RelayBandwidthBurst</tt> value.</td>
-</tr>
-</table>
+| Property | Description |
+| --- | --- |
+| **`name`** | Instance name. Example: the instance name `foo` will create the systemd unit `tor@foo` owned by user/group `_tor-foo`. The configuration will be in */etc/tor/instances/foo/torrc*, the data in */var/lib/tor-instances/foo*. |
+| **`or_ports`** | List of `ORPort` values. |
+| `metrics_port` | `MetricsPort` value. |
+| `metrics_port_policy` | `MetricsPortPolicy` value. |
+| `nickname` | Relay nickname. |
+| `relay_bandwidth_rate` | `RelayBandwidthRate` value. |
+| `relay_bandwidth_burst` | `RelayBandwidthBurst` value. |
 
 ### Bridge Configuration
 
 The following properties are used by bridge instances (required properties in
 **bold**):
 
-<table>
-<tr>
-  <th>Property</th>
-  <th>Description</th>
-</tr>
-<tr>
-  <td>ext_or_port</td>
-  <td><tt>ExtORPort</tt> value.</td>
-</tr>
-<tr>
-  <td><b>pluggable_transports</b></td>
-  <td>List of pluggable transport definitions (see below).</td>
-</tr>
-</table>
+| Property | Description |
+| --- | --- |
+| `ext_or_port` | `ExtORPort` value. |
+| **`pluggable_transports`** | List of pluggable transport definitions (see below). |
 
 Example:
 
@@ -205,28 +90,11 @@ tor_instances_bridge:
 
 The following properties are used by middle/exit instances:
 
-<table>
-<tr>
-  <th>Property</th>
-  <th>Description</th>
-</tr>
-<tr>
-  <td>address</td>
-  <td>
-      The IPv4 address of this server.
-  </td>
-</tr>
-<tr>
-  <td>ipv6_exit</td>
-  <td>Allow IPv6 exit traffic (exits only).</td>
-</tr>
-<tr>
-  <td>outbound_addresses</td>
-  <td>
-      List of <tt>OutboundBindAddress</tt> values.
-  </td>
-</tr>
-</table>
+| Property | Description |
+| --- | --- |
+| `address` | The IPv4 address of this server. |
+| `ipv6_exit` | Allow IPv6 exit traffic (exits only). |
+| `outbound_addresses` | List of `OutboundBindAddress` values. |
 
 Example:
 
@@ -272,24 +140,11 @@ Hidden services are only configured on the default instance via the
 The following properties are used by hidden services (required properties in
 **bold**):
 
-<table>
-<tr>
-  <th>Property</th>
-  <th>Description</th>
-</tr>
-<tr>
-  <td><b>name</b></td>
-  <td>Hidden service name.</td>
-</tr>
-<tr>
-  <td><b>ports</b></td>
-  <td>List of <tt>HiddenServicePort</tt> values.</td>
-</tr>
-<tr>
-  <td>authorized_clients</td>
-  <td>List of client authorizations.</td>
-</tr>
-</table>
+| Property | Description |
+| --- | --- |
+| **`name`** | Hidden service name. |
+| **`ports`** | List of `HiddenServicePort` values. |
+| `authorized_clients` | List of client authorizations. |
 
 Example:
 
@@ -298,6 +153,7 @@ tor_default_hidden_services:
   - name: ssh
     ports: [22]
 ```
+
 Result:
 
 ```
@@ -334,4 +190,4 @@ tor_default_hidden_services:
 
 ## License
 
-GPLv3
+GNU General Public License v3 or later (GPLv3+)
