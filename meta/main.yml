@@ -1,0 +1,16 @@
+galaxy_info:
+  role_name: tor
+  author: Alexander Dietrich
+  description: Installs Tor relays on Debian-based systems with systemd.
+  license: GPL-3.0-or-later
+  min_ansible_version: 2.10
+  platforms:
+    - name: Debian
+      versions: [all]
+    - name: Ubuntu
+      versions: [all]
+  galaxy_tags:
+    - debian
+    - tor
+    - tor_relay
+    - ubuntu
