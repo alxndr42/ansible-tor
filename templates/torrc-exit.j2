@@ -1,6 +1,6 @@
-{% include 'instance-header.j2' +%}
-{% if tor_my_family is defined %}
+{% include 'instance-header.j2' %}
 
+{% if tor_my_family is defined %}
 ## Uncomment this if you run more than one Tor relay, and add the identity
 ## key fingerprint of each Tor relay you control, even if they're on
 ## different networks. You declare it here so Tor clients can avoid
@@ -11,8 +11,8 @@
 {% for fingerprint in tor_my_family %}
 MyFamily {{ fingerprint }}
 {% endfor %}
-{% endif %}
 
+{% endif %}
 {% if instance.outbound_addresses is defined %}
 ## IP address(es) to use for outbound connections.
 {% for address in instance.outbound_addresses %}
