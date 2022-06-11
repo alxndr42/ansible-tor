@@ -1,6 +1,6 @@
 # ansible-tor
 
-Installs Tor relays on Debian-based systems with systemd.
+Installs Tor relays on Debian-based systems.
 
 This role uses the default Tor instance (configuration in */etc/tor/torrc*)
 for hidden services and optionally a SOCKS proxy. Bridge, middle and exit
@@ -127,6 +127,9 @@ A given host's and instance's offline keys are copied from the local directory
 
 You can use the included script [tor-keygen](scripts/tor-keygen) to create and
 update offline keys.
+
+To skip copying the offline keys, use `--skip-tags copy-offline-keys` when
+applying the role.
 
 **Please note:** Tor creates the RSA key `secret_id_key` on new relays. This
 key is part of the relay identity, so you should create a backup. If the key is

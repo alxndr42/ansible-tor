@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1
+
+- Reformat `torrc` templates for better Ansible compatibility
+
 ## 2.7.0
 
 - Remove `tor_exit_notice` and `dir_ports` variables
