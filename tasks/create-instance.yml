@@ -18,12 +18,24 @@
   notify: reload Tor
   tags: copy-offline-keys
 
+- name: check for remote RSA key
+  stat:
+    path: /var/lib/tor-instances/{{ instance.name }}/keys/secret_id_key
+  register: remote_rsa_key
+
 - name: check for local RSA key
   local_action:
     module: stat
     path: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/secret_id_key"
   become: no
-  register: rsa_key
+  register: local_rsa_key
+
+- name: copy remote RSA key
+  fetch:
+    src: /var/lib/tor-instances/{{ instance.name }}/keys/secret_id_key
+    dest: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/"
+    flat: yes
+  when: remote_rsa_key.stat.exists and not local_rsa_key.stat.exists
 
 - name: copy local RSA key
   copy:
@@ -32,7 +44,7 @@
     mode: 0600
     owner: _tor-{{ instance.name }}
     group: _tor-{{ instance.name }}
-  when: rsa_key.stat.exists
+  when: local_rsa_key.stat.exists
 
 - name: template instance torrc
   template:

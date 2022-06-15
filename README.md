@@ -132,8 +132,8 @@ To skip copying the offline keys, use `--skip-tags copy-offline-keys` when
 applying the role.
 
 **Please note:** Tor creates the RSA key `secret_id_key` on new relays. This
-key is part of the relay identity, so you should create a backup. If the key is
-found in the local directory mentioned above, it is also copied to the host.
+key is part of the relay identity, so you should copy it to the local directory
+mentioned above. The role does this once the RSA key exists.
 
 ## Hidden Services
 
