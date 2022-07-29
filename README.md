@@ -60,6 +60,7 @@ in **bold**):
 | `metrics_port` | `MetricsPort` value. |
 | `metrics_port_policy` | `MetricsPortPolicy` value. |
 | `nickname` | Relay nickname. |
+| `max_advertised_bandwidth` | `MaxAdvertisedBandwidth` value. |
 | `relay_bandwidth_rate` | `RelayBandwidthRate` value. |
 | `relay_bandwidth_burst` | `RelayBandwidthBurst` value. |
 
