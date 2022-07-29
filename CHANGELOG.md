@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.0
+
+- Backup new RSA keys
+- Add `max_advertised_bandwidth` instance variable
+
 ## 2.7.1
 
 - Reformat `torrc` templates for better Ansible compatibility
