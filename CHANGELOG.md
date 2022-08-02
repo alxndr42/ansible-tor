@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.1
+
+- Add missing `copy-offline-keys` tag
+
 ## 2.8.0
 
 - Backup new RSA keys
