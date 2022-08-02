@@ -22,6 +22,7 @@
   stat:
     path: /var/lib/tor-instances/{{ instance.name }}/keys/secret_id_key
   register: remote_rsa_key
+  tags: copy-offline-keys
 
 - name: check for local RSA key
   local_action:
