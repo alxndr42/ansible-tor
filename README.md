@@ -37,7 +37,7 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 | `tor_default_socks_port` | SOCKS port of the default instance. |
 | `tor_dist` | Distribution name on [deb.torproject.org](https://deb.torproject.org/torproject.org/dists/). |
 | `tor_exit_policy` | List of `ExitPolicy` values (exits only). Overrides `tor_reduced_exit_policy`. |
-| `tor_instance_settings` | List of additional settings for bridge, middle and exit instances. |
+| `tor_instance_settings` | List of additional settings for all bridge, middle and exit instances. |
 | `tor_my_family` | List of fingerprints for `MyFamily`. |
 | `tor_nameservers` | List of nameserver addresses to add to */etc/tor/resolv.conf*, which will be used by bridge, middle and exit instances as `ServerDNSResolvConfFile`. |
 | `tor_onion_auth` | Local directory for client authorization files (see below). |
@@ -57,12 +57,10 @@ in **bold**):
 | --- | --- |
 | **`name`** | Instance name. Example: the instance name `foo` will create the systemd unit `tor@foo` owned by user/group `_tor-foo`. The configuration will be in */etc/tor/instances/foo/torrc*, the data in */var/lib/tor-instances/foo*. |
 | **`or_ports`** | List of `ORPort` values. |
+| `extra_settings` | List of additional settings for this instance. |
 | `metrics_port` | `MetricsPort` value. |
 | `metrics_port_policy` | `MetricsPortPolicy` value. |
 | `nickname` | Relay nickname. |
-| `max_advertised_bandwidth` | `MaxAdvertisedBandwidth` value. |
-| `relay_bandwidth_rate` | `RelayBandwidthRate` value. |
-| `relay_bandwidth_burst` | `RelayBandwidthBurst` value. |
 
 ### Bridge Configuration
 
