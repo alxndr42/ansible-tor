@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.9.0
+
+- Remove `max_advertised_bandwidth` instance variable
+- Remove `relay_bandwidth_rate` instance variable
+- Remove `relay_bandwidth_burst` instance variable
+- Add `extra_settings` instance variable
+
 ## 2.8.1
 
 - Add missing `copy-offline-keys` tag
