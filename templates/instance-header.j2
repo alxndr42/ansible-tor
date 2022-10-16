@@ -3,27 +3,32 @@
 ##
 ## Tor will look for this file in various places based on your platform:
 ## https://www.torproject.org/docs/faq#torrc
-
-{% if tor_avoid_disk %}
-AvoidDiskWrites 1
-{% endif %}
-OfflineMasterKey 1
-{% if tor_nameservers is defined %}
-ServerDNSResolvConfFile /etc/tor/resolv.conf
-{% endif %}
-
 {% if tor_instance_settings is defined %}
+
 {% for setting in tor_instance_settings %}
 {{ setting }}
 {% endfor %}
-
 {% endif %}
 {% if instance.extra_settings is defined %}
+
 {% for setting in instance.extra_settings %}
 {{ setting }}
 {% endfor %}
-
 {% endif %}
+{% if tor_avoid_disk %}
+
+## If non-zero, try to write to disk less frequently than we would otherwise.
+AvoidDiskWrites 1
+{% endif %}
+{% if tor_nameservers is defined %}
+
+## Overrides the default DNS configuration.
+ServerDNSResolvConfFile /etc/tor/resolv.conf
+{% endif %}
+
+## If non-zero, the Tor relay will never generate or load its master secret key.
+OfflineMasterKey 1
+
 ## Tor opens a SOCKS proxy on port 9050 by default -- even if you don't
 ## configure one below. Set "SOCKSPort 0" if you plan to run Tor only
 ## as a relay, and not make any local application connections yourself.
