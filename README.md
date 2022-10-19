@@ -116,7 +116,7 @@ tor_exit_policy:
 
 ### Exit Policy Blocks
 
-On exit instances, the file */etc/tor/exit-policy-blocks* will be included in
+On exit instances, */etc/tor/exit-policy-blocks\** files will be included in
 instance torrc files before any `tor_exit_policy` values. You can use this to
 place `ExitPolicy reject` statements in front of your exit policy.
 
