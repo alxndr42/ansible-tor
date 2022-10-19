@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.10.0
+
+- Add `tor_default_settings` variable
+- Include `/etc/tor/exit-policy-blocks*`
+
 ## 2.9.0
 
 - Remove `max_advertised_bandwidth` instance variable
