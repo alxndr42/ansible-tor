@@ -8,6 +8,7 @@ tor_dist: "{{ ansible_lsb.codename }}"
 tor_instances_bridge: []
 tor_instances_exit: []
 tor_instances_middle: []
+tor_instances_remove: []
 tor_offline_keys: ~/.tor_offline_keys
 tor_onion_auth: ~/.tor_onion_auth
 tor_packages_extra: []

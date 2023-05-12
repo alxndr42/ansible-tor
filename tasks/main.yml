@@ -11,6 +11,13 @@
 - name: install tor
   include_tasks: install-tor.yml
 
+- name: remove instances
+  include_tasks: remove-instance.yml
+  loop: "{{ tor_instances_remove }}"
+  loop_control:
+    loop_var: name
+  tags: [remove-instances]
+
 - name: create bridge instances
   include_tasks: create-instance.yml
   vars:

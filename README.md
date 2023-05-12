@@ -191,6 +191,11 @@ tor_default_hidden_services:
     authorized_clients: [my-client, my-other-client]
 ```
 
+## Instance Removal
+
+You can define a list of instance names as `tor_instances_remove` and the
+associated systemd units, users, and files will be removed.
+
 ## License
 
 GNU General Public License v3 or later (GPLv3+)

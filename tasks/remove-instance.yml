@@ -1,0 +1,23 @@
+---
+- name: stop service
+  systemd:
+    name: tor@{{ name }}
+    state: stopped
+
+- name: remove user
+  user:
+    name: _tor-{{ name }}
+    state: absent
+    remove: true
+
+- name: remove files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/tor/instances/{{ name }}
+    - /etc/systemd/system/tor@{{ name }}.service
+
+- name: reload systemd
+  systemd:
+    daemon_reload: true
