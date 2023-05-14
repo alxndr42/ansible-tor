@@ -3,3 +3,7 @@
   service:
     name: tor
     state: reloaded
+
+- name: reload systemd
+  systemd:
+    daemon_reload: true
