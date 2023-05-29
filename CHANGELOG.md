@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.11.0
+
+- Add systemd restart/timeout variables
+- Add `tor_instances_remove` variable
+
 ## 2.10.0
 
 - Add `tor_default_settings` variable
