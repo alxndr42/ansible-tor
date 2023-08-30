@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.12.0
+
+- Update Tor signing key handling
+
 ## 2.11.0
 
 - Add systemd restart/timeout variables
