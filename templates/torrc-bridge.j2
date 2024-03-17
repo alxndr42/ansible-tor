@@ -16,4 +16,7 @@ ExtORPort {{ instance.ext_or_port | default('auto') }}
 
 ServerTransportPlugin {{ pt.name }} exec {{ pt.exec }}
 ServerTransportListenAddr {{ pt.name }} {{ pt.address }}
+{% if pt.options is defined %}
+ServerTransportOptions {{ pt.name }} {{ pt.options }}
+{% endif %}
 {% endfor %}
