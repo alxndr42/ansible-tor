@@ -1,9 +1,5 @@
 {% include 'instance-header.j2' %}
 
-## A comma-separated list of exit policies. They're considered first
-## to last, and the first match wins.
-ExitPolicy reject *:* # no exits allowed
-
 ## Bridge relays (or "bridges") are Tor relays that aren't listed in the
 ## main directory. Since there is no complete public list of them, even an
 ## ISP that filters connections to all the known Tor relays probably
