@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.13.0
+
+- Remove explicit `ExitPolicy` for bridges
+- Add pluggable transport `options` for bridges
+
 ## 2.12.0
 
 - Update Tor signing key handling
