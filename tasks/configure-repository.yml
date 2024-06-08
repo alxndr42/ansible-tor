@@ -11,7 +11,7 @@
   get_url:
     url: https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc
     dest: /usr/share/keyrings/deb.torproject.org-keyring.gpg
-    checksum: sha256:7b3fec7e6928ec67c6342a78ed9b2d647d034d0d01c9dd17864f4d7c04bf1347
+    checksum: sha256:2318eb0aa0349a1f111421ba0ffd949da805cf4fda6d915f80710144955d5774
     # Fingerprint: A3C4 F0F9 79CA A22C DBA8  F512 EE8C BC9E 886D DD89
   when: not keyring.stat.exists
 
