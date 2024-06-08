@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.14.0
+
+- Update Tor keyring checksum
+
 ## 2.13.0
 
 - Remove explicit `ExitPolicy` for bridges
