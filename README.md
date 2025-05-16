@@ -45,8 +45,9 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 | `tor_packages_extra` | Extra system packages to install. |
 | `tor_reduced_exit_policy` | `ReducedExitPolicy` value (exits only). |
 | `tor_repository` | Use the Tor Project package repository. |
-| `tor_systemd_restart_sec` | `RestartSec` systemd value for `tor@.service`. |
-| `tor_systemd_timeout_start_sec` | `TimeoutStartSec` systemd value for `tor@.service`. |
+| `tor_systemd_new_privileges` | `NoNewPrivileges=no` for `tor@.service`. |
+| `tor_systemd_restart_sec` | `RestartSec` value for `tor@.service`. |
+| `tor_systemd_timeout_start_sec` | `TimeoutStartSec` value for `tor@.service`. |
 
 ## Instance Configuration
 

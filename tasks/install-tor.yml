@@ -50,12 +50,18 @@
     path: /etc/systemd/system/tor@.service.d
     state: directory
   when: tor_instances_bridge or tor_instances_middle or tor_instances_exit
+
 - name: template systemd override
   template:
     src: systemd-override.conf
     dest: /etc/systemd/system/tor@.service.d/override.conf
   when: tor_instances_bridge or tor_instances_middle or tor_instances_exit
-  notify: reload systemd
+  register: systemd
+
+- name: reload systemd
+  ansible.builtin.systemd_service:
+    daemon_reload: yes
+  when: systemd.changed
 
 - name: initialize exit-policy-blocks
   file:

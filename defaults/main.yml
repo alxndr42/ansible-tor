@@ -13,5 +13,6 @@ tor_offline_keys: ~/.tor_offline_keys
 tor_onion_auth: ~/.tor_onion_auth
 tor_packages_extra: []
 tor_repository: true
+tor_systemd_new_privileges: false
 tor_systemd_restart_sec: 60
 tor_systemd_timeout_start_sec: infinity
