@@ -1,12 +1,4 @@
 ---
-# Bug: 0.2.7.5 cannot work inside lxc container
-# https://gitlab.torproject.org/tpo/core/tor/-/issues/17754
-- name: copy AppArmor override
-  copy:
-    src: apparmor-override.conf
-    dest: /etc/systemd/system/tor@default.service.d/
-  when: tor_apparmor == false
-
 - name: install tor
   apt:
     name:

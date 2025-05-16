@@ -30,7 +30,6 @@ Please see [defaults/main.yml](defaults/main.yml) for default values.
 
 | Variable | Description |
 | --- | --- |
-| `tor_apparmor` | Use `false` to disable AppArmor, in case Tor is running in an LXC container. ([Bug 17754](https://gitlab.torproject.org/tpo/core/tor/-/issues/17754)) |
 | `tor_avoid_disk` | Set `AvoidDiskWrites`, for flash-based systems. |
 | `tor_default_client_onion_auth` | Client authorizations for the default instance (see below). |
 | `tor_default_hidden_services` | Hidden service definitions for the default instance (see below). |

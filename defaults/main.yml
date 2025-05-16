@@ -1,6 +1,5 @@
 ---
 tor: true
-tor_apparmor: true
 tor_avoid_disk: false
 tor_default_client_onion_auth: []
 tor_default_hidden_services: []
