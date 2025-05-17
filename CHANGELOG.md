@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.15.0
+
+- Remove `tor_apparmor` variable
+- Add `tor_systemd_new_privileges` variable
+
 ## 2.14.0
 
 - Update Tor keyring checksum
