@@ -1,11 +1,11 @@
 ---
 - name: create instance {{ instance.name }}
-  command: tor-instance-create {{ instance.name }}
+  ansible.builtin.command: tor-instance-create {{ instance.name }}
   args:
     creates: /etc/tor/instances/{{ instance.name }}/torrc
 
 - name: copy offline ED25519 keys
-  copy:
+  ansible.builtin.copy:
     src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/{{ item }}"
     dest: /var/lib/tor-instances/{{ instance.name }}/keys/
     mode: 0600
@@ -19,21 +19,21 @@
   tags: copy-offline-keys
 
 - name: check for remote RSA key
-  stat:
+  ansible.builtin.stat:
     path: /var/lib/tor-instances/{{ instance.name }}/keys/secret_id_key
   register: remote_rsa_key
   tags: copy-offline-keys
 
 - name: check for local RSA key
   local_action:
-    module: stat
+    module: ansible.builtin.stat
     path: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/secret_id_key"
   become: no
   register: local_rsa_key
   tags: copy-offline-keys
 
 - name: copy remote RSA key
-  fetch:
+  ansible.builtin.fetch:
     src: /var/lib/tor-instances/{{ instance.name }}/keys/secret_id_key
     dest: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/"
     flat: yes
@@ -41,7 +41,7 @@
   tags: copy-offline-keys
 
 - name: copy local RSA key
-  copy:
+  ansible.builtin.copy:
     src: "{{ tor_offline_keys }}/{{ inventory_hostname }}/{{ instance.name }}/keys/secret_id_key"
     dest: /var/lib/tor-instances/{{ instance.name }}/keys/
     mode: 0600
@@ -51,14 +51,14 @@
   tags: copy-offline-keys
 
 - name: template instance torrc
-  template:
+  ansible.builtin.template:
     src: torrc-{{ type }}.j2
     dest: /etc/tor/instances/{{ instance.name }}/torrc
     backup: yes
   notify: reload Tor
 
 - name: enable service
-  service:
+  ansible.builtin.service:
     name: tor@{{ instance.name }}
     enabled: yes
     state: started

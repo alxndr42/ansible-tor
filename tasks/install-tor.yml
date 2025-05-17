@@ -1,50 +1,50 @@
 ---
 - name: install tor
-  apt:
-    name:
-      - tor
+  ansible.builtin.apt:
+    name: tor
+    cache_valid_time: 86400
 
 # Bug: Tor needs to stop trying to read directories before it changes users
 # https://gitlab.torproject.org/tpo/core/tor/-/issues/22331
 - name: check for local AppArmor config
-  stat: path=/etc/apparmor.d/local/system_tor
+  ansible.builtin.stat: path=/etc/apparmor.d/local/system_tor
   register: f
 - name: allow checking HS directories
-  lineinfile:
+  ansible.builtin.lineinfile:
     name: /etc/apparmor.d/local/system_tor
     line: "capability dac_read_search,"
   when: f.stat.exists
   register: config
 - name: populate service facts
-  service_facts:
+  ansible.builtin.service_facts:
 - name: reload AppArmor
-  service:
+  ansible.builtin.service:
     name: apparmor
     state: reloaded
   when: config.changed and "apparmor" in services
 
 - name: template resolv.conf
-  template:
+  ansible.builtin.template:
     src: resolv.conf.j2
     dest: /etc/tor/resolv.conf
   when: tor_nameservers is defined
   notify: reload Tor
 
 - name: template default torrc
-  template:
+  ansible.builtin.template:
     src: torrc-default.j2
     dest: /etc/tor/torrc
     backup: yes
   notify: reload Tor
 
 - name: create systemd override folder
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/tor@.service.d
     state: directory
   when: tor_instances_bridge or tor_instances_middle or tor_instances_exit
 
 - name: template systemd override
-  template:
+  ansible.builtin.template:
     src: systemd-override.conf
     dest: /etc/systemd/system/tor@.service.d/override.conf
   when: tor_instances_bridge or tor_instances_middle or tor_instances_exit
@@ -56,7 +56,7 @@
   when: systemd.changed
 
 - name: initialize exit-policy-blocks
-  file:
+  ansible.builtin.file:
     path: /etc/tor/exit-policy-blocks
     state: touch
     modification_time: preserve
@@ -64,7 +64,7 @@
   when: tor_instances_exit | list
 
 - name: copy HS auth public keys
-  copy:
+  ansible.builtin.copy:
     src: "{{ tor_onion_auth }}/{{ item[1] }}.auth"
     dest: /var/lib/tor/hs_{{ item[0].name }}/authorized_clients/
     directory_mode: 02700
@@ -74,7 +74,7 @@
   notify: reload Tor
 
 - name: copy HS auth private keys
-  copy:
+  ansible.builtin.copy:
     src: "{{ tor_onion_auth }}/{{ item }}.auth_private"
     dest: /var/lib/tor/onion_auth/
     directory_mode: 02700

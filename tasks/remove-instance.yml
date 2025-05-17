@@ -1,17 +1,17 @@
 ---
 - name: stop service
-  systemd:
+  ansible.builtin.systemd:
     name: tor@{{ name }}
     state: stopped
 
 - name: remove user
-  user:
+  ansible.builtin.user:
     name: _tor-{{ name }}
     state: absent
     remove: true
 
 - name: remove files
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   loop:
@@ -19,5 +19,5 @@
     - /etc/systemd/system/tor@{{ name }}.service
 
 - name: reload systemd
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true

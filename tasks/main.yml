@@ -1,25 +1,25 @@
 ---
 - name: install extra packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ tor_packages_extra }}"
   when: tor_packages_extra | list
 
 - name: configure Tor Project repository
-  include_tasks: configure-repository.yml
+  ansible.builtin.include_tasks: configure-repository.yml
   when: tor_repository
 
 - name: install tor
-  include_tasks: install-tor.yml
+  ansible.builtin.include_tasks: install-tor.yml
 
 - name: remove instances
-  include_tasks: remove-instance.yml
+  ansible.builtin.include_tasks: remove-instance.yml
   loop: "{{ tor_instances_remove }}"
   loop_control:
     loop_var: name
   tags: [remove-instances]
 
 - name: create bridge instances
-  include_tasks: create-instance.yml
+  ansible.builtin.include_tasks: create-instance.yml
   vars:
     type: bridge
   loop: "{{ tor_instances_bridge }}"
@@ -28,7 +28,7 @@
   tags: [bridge-instances, tor-instances]
 
 - name: create middle instances
-  include_tasks: create-instance.yml
+  ansible.builtin.include_tasks: create-instance.yml
   vars:
     type: middle
   loop: "{{ tor_instances_middle }}"
@@ -37,7 +37,7 @@
   tags: [middle-instances, tor-instances]
 
 - name: create exit instances
-  include_tasks: create-instance.yml
+  ansible.builtin.include_tasks: create-instance.yml
   vars:
     type: exit
   loop: "{{ tor_instances_exit }}"

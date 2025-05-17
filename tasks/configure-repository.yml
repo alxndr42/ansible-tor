@@ -3,12 +3,12 @@
 
 ---
 - name: check for keyring
-  stat:
+  ansible.builtin.stat:
     path: /usr/share/keyrings/deb.torproject.org-keyring.gpg
   register: keyring
 
 - name: download initial keyring
-  get_url:
+  ansible.builtin.get_url:
     url: https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc
     dest: /usr/share/keyrings/deb.torproject.org-keyring.gpg
     checksum: sha256:2318eb0aa0349a1f111421ba0ffd949da805cf4fda6d915f80710144955d5774
@@ -16,14 +16,14 @@
   when: not keyring.stat.exists
 
 - name: remove old repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb http://deb.torproject.org/torproject.org {{ tor_dist }} main
     state: absent
 
 - name: add repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] http://deb.torproject.org/torproject.org {{ tor_dist }} main
 
 - name: install keyring
-  apt:
+  ansible.builtin.apt:
     name: deb.torproject.org-keyring
